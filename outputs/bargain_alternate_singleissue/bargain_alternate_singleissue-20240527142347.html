@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #800080; text-decoration-color: #800080}
+.r2 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r3 {color: #800000; text-decoration-color: #800000}
+.r4 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r5 {color: #808000; text-decoration-color: #808000}
+.r6 {color: #008080; text-decoration-color: #008080; font-weight: bold}
+.r7 {font-weight: bold}
+.r8 {color: #008000; text-decoration-color: #008000}
+.r9 {color: #800000; text-decoration-color: #800000; font-style: italic}
+.r10 {color: #00ff00; text-decoration-color: #00ff00; font-style: italic}
+body {
+    color: #000000;
+    background-color: #ffffff;
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit">All outputs written to .<span class="r1">/outputs/bargain_alternate_singleissue/</span><span class="r2">bargain_alternate_singleissue-20240527142347.html</span>
+<span class="r3">experiment </span><span class="r4">1</span><span class="r3">/</span><span class="r4">1</span><span class="r3"> ...</span>
+<span class="r3">Start to play bargain_alternate_singleissue</span>
+<span class="r3">episode </span><span class="r4">1</span><span class="r3">/</span><span class="r4">1</span><span class="r3"> ...</span>
+To buyer:
+This is the beginning of a new game instance, where you will play as the buyer. Your discount factor <span class="r5">delta_b</span>=<span class="r6">0.67</span>, 
+seller&#x27;s discount factor <span class="r5">delta_s</span>=<span class="r6">0.77</span>, and the deadline <span class="r5">T</span>=<span class="r6">3</span>.
+To seller:
+This is the beginning of a new game instance, where you will play as the seller. Your discount factor <span class="r5">delta_s</span>=<span class="r6">0.77</span>, 
+buyer&#x27;s discount factor <span class="r5">delta_b</span>=<span class="r6">0.67</span>, and the deadline <span class="r5">T</span>=<span class="r6">3</span>.
+Question: Now compute the subgame perfect equilibrium <span class="r7">(</span>SPE<span class="r7">)</span> step by step.
+Thought: We can compute the SPE via backward induction from the last time step <span class="r6">3</span> to time step <span class="r6">1</span>. Since <span class="r5">t</span>=<span class="r6">3</span> is odd, it 
+will be the buyer&#x27;s turn to make the final offer. The seller will get <span class="r6">0</span> utility if rejecting the buyer&#x27;s offer. 
+Therefore, we can compute the buyer&#x27;s optimal price at time step <span class="r6">3</span> by calling BackwardOneStep, and then compute the 
+corresponding utility by calling CalcUtil.
+Operation: call function BackwardOneStep with inputs <span class="r5">agent</span>=<span class="r8">&#x27;buyer&#x27;</span> <span class="r5">opponent_util_if_rej</span>=<span class="r6">0.0</span> <span class="r5">time_step</span>=<span class="r6">3</span>
+Result: The SPE price of buyer at time step <span class="r6">3</span> is <span class="r6">0.0</span>
+Thought: The SPE price of buyer at time step <span class="r6">3</span> is <span class="r6">0.0</span>. Now, we need to compute the utility that the buyer gets for 
+agreeing on this price at time step <span class="r6">3</span>.
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r8">&#x27;buyer&#x27;</span> <span class="r5">price</span>=<span class="r6">0.0</span> <span class="r5">time_step</span>=<span class="r6">3</span>
+Result: The utility that buyer gets for agreeing on price <span class="r6">0.0</span> at time step <span class="r6">3</span> is <span class="r6">0.4489</span>
+Thought: Now we move one time step back to <span class="r5">t</span>=<span class="r6">2</span>, which is the seller&#x27;s turn to make an offer. Based on our reasoning for 
+time step <span class="r5">t</span>=<span class="r6">3</span>, the buyer would get a utility of <span class="r6">0.4489</span> if the game continues to time step <span class="r5">t</span>=<span class="r6">3</span>. Therefore, we can compute
+the seller&#x27;s optimal price at time step <span class="r6">2</span> by calling BackwardOneStep, and then compute the corresponding utility by 
+calling CalcUtil.
+Operation: call function BackwardOneStep with inputs <span class="r5">agent</span>=<span class="r8">&#x27;seller&#x27;</span> <span class="r5">opponent_util_if_rej</span>=<span class="r6">0.4489</span> <span class="r5">time_step</span>=<span class="r6">2</span>
+Result: The SPE price of seller at time step <span class="r6">2</span> is <span class="r6">0.33</span>
+Thought: The SPE price of seller at time step <span class="r6">2</span> is <span class="r6">0.33</span>. Now, we need to compute the utility that the seller gets for 
+agreeing on this price at time step <span class="r6">2</span>.
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r8">&#x27;seller&#x27;</span> <span class="r5">price</span>=<span class="r6">0.33</span> <span class="r5">time_step</span>=<span class="r6">2</span>
+Result: The utility that seller gets for agreeing on price <span class="r6">0.33</span> at time step <span class="r6">2</span> is <span class="r6">0.2541</span>
+Thought: Now we move one time step back to <span class="r5">t</span>=<span class="r6">1</span>, which is the buyer&#x27;s turn to make an offer. Based on our reasoning for 
+time step <span class="r5">t</span>=<span class="r6">2</span>, the seller would get a utility of <span class="r6">0.2541</span> if the game continues to time step <span class="r5">t</span>=<span class="r6">2</span>. Therefore, we can 
+compute the buyer&#x27;s optimal price at time step <span class="r6">1</span> by calling BackwardOneStep, and then compute the corresponding utility 
+by calling CalcUtil.
+Operation: call function BackwardOneStep with inputs <span class="r5">agent</span>=<span class="r8">&#x27;buyer&#x27;</span> <span class="r5">opponent_util_if_rej</span>=<span class="r6">0.2541</span> <span class="r5">time_step</span>=<span class="r6">1</span>
+Result: The SPE price of buyer at time step <span class="r6">1</span> is <span class="r6">0.2541</span>
+Thought: The SPE price of buyer at time step <span class="r6">1</span> is <span class="r6">0.2541</span>. Now, we need to compute the utility that the buyer gets for 
+agreeing on this price at time step <span class="r6">1</span>.
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r8">&#x27;buyer&#x27;</span> <span class="r5">price</span>=<span class="r6">0.2541</span> <span class="r5">time_step</span>=<span class="r6">1</span>
+Result: The utility that buyer gets for agreeing on price <span class="r6">0.2541</span> at time step <span class="r6">1</span> is <span class="r6">0.7459</span>
+Thought: I have finished my reasoning for time step <span class="r5">t</span>=<span class="r6">1</span>, so I can exit the reasoning process, and save the computed 
+subgame perfect equilibrium strategy in my working memory.
+Question: Now compute the subgame perfect equilibrium <span class="r7">(</span>SPE<span class="r7">)</span> step by step.
+Thought: To compute the subgame perfect equilibrium <span class="r7">(</span>SPE<span class="r7">)</span> for each time step, we will use backward induction starting 
+from the last time step <span class="r7">(</span><span class="r5">t</span>=<span class="r6">3</span><span class="r7">)</span> and move backward to the first time step <span class="r7">(</span><span class="r5">t</span>=<span class="r6">1</span><span class="r7">)</span>. At each step, we will determine the 
+optimal price offer and the corresponding utilities for both the buyer and the seller.
+<span class="r3">This is time step </span><span class="r4">1</span><span class="r3">. Now buyer needs to propose a price in the range of </span><span class="r4">[</span><span class="r4">0.0</span><span class="r3">, </span><span class="r4">1.0</span><span class="r4">]</span><span class="r3"> to the seller.</span>
+Question: This is time step <span class="r6">1</span>. Now buyer needs to propose a price in the range of <span class="r7">[</span><span class="r6">0.0</span>, <span class="r6">1.0</span><span class="r7">]</span> to the seller.
+Thought: Assuming my opponent is rational, then to maximize my utility, I should adopt the SPE strategy. Therefore, I 
+should retrieve the computed SPE price for the current time step <span class="r6">1</span> by calling GetSPEPrice.
+Operation: call function GetSPEPrice with inputs <span class="r5">agent</span>=<span class="r8">&#x27;buyer&#x27;</span> <span class="r5">time_step</span>=<span class="r6">1</span>
+Result: The SPE price of buyer at time step <span class="r6">1</span> is <span class="r6">0.2541</span>
+Thought: Based on the computed subgame perfect equilibrium <span class="r7">(</span>SPE<span class="r7">)</span> strategy, the optimal price for the buyer to propose at
+time step <span class="r6">1</span> is <span class="r6">0.2541</span>.
+spe price <span class="r6">0.2541</span>, buyer proposed price <span class="r6">0.2541</span>
+<span class="r3">buyer: </span><span class="r4">0.2541</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+<span class="r3">This time step </span><span class="r4">1</span><span class="r3">, and buyer has proposed a price of </span><span class="r4">0.2541</span><span class="r3">. Now the seller needs to decide whether to accept it or </span>
+<span class="r3">reject it.</span>
+Question: This time step <span class="r6">1</span>, and buyer has proposed a price of <span class="r6">0.2541</span>. Now the seller needs to decide whether to accept 
+it or reject it.
+Thought: To decide whether to accept or reject the buyer&#x27;s offer of <span class="r6">0.2541</span> at time step <span class="r6">1</span>, I need to compare the utility
+I would get by accepting this price versus the utility I would get by rejecting it and making a counteroffer in the next
+time step <span class="r7">(</span><span class="r5">t</span>=<span class="r6">2</span><span class="r7">)</span>. First, I will compute my utility for accepting the price of <span class="r6">0.2541</span> at the current time step <span class="r6">1</span> by 
+calling CalcUtil.
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r8">&#x27;seller&#x27;</span> <span class="r5">price</span>=<span class="r6">0.2541</span> <span class="r5">time_step</span>=<span class="r6">1</span>
+Result: The utility that seller gets for agreeing on price <span class="r6">0.2541</span> at time step <span class="r6">1</span> is <span class="r6">0.2541</span>
+Thought: The utility for accepting the price of <span class="r6">0.2541</span> at time step <span class="r6">1</span> is <span class="r6">0.2541</span>. Next, I need to compute the utility I 
+would get by rejecting the offer and making a counteroffer at time step <span class="r6">2</span>. To do this, I will retrieve the previously 
+computed subgame perfect equilibrium <span class="r7">(</span>SPE<span class="r7">)</span> price for time step <span class="r6">2</span> and then compute the corresponding utility.
+Operation: call function GetSPEPrice with inputs <span class="r5">agent</span>=<span class="r8">&#x27;seller&#x27;</span> <span class="r5">time_step</span>=<span class="r6">2</span>
+Result: The SPE price for time step <span class="r6">2</span> hasn&#x27;t been computed yet.
+Thought: Since the SPE price for time step <span class="r6">2</span> hasn&#x27;t been computed yet, I need to compute it using backward induction. 
+Let&#x27;s start by computing the SPE price for time step <span class="r6">3</span>, which is the buyer&#x27;s turn to make an offer. At time step <span class="r6">3</span>, if 
+the seller rejects the offer, the seller gets <span class="r6">0</span> utility. Therefore, we can compute the buyer&#x27;s optimal price at time 
+step <span class="r6">3</span> by calling BackwardOneStep, and then compute the corresponding utility by calling CalcUtil.
+Operation: call function BackwardOneStep with inputs <span class="r5">agent</span>=<span class="r8">&#x27;buyer&#x27;</span> <span class="r5">opponent_util_if_rej</span>=<span class="r6">0.0</span> <span class="r5">time_step</span>=<span class="r6">3</span>
+Result: The SPE price of buyer at time step <span class="r6">3</span> is <span class="r6">0.0</span>
+Thought: The SPE price of buyer at time step <span class="r6">3</span> is <span class="r6">0.0</span>. Now, I will compute the utility for the buyer at this price by 
+calling CalcUtil.
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r8">&#x27;buyer&#x27;</span> <span class="r5">price</span>=<span class="r6">0.0</span> <span class="r5">time_step</span>=<span class="r6">3</span>
+Result: The utility that buyer gets for agreeing on price <span class="r6">0.0</span> at time step <span class="r6">3</span> is <span class="r6">0.4489</span>
+Thought: The utility that the buyer gets for agreeing on price <span class="r6">0.0</span> at time step <span class="r6">3</span> is <span class="r6">0.4489</span>. Now, we move one time step 
+back to <span class="r5">t</span>=<span class="r6">2</span>, which is the seller&#x27;s turn to make an offer. Based on our reasoning for time step <span class="r5">t</span>=<span class="r6">3</span>, the buyer would get 
+a utility of <span class="r6">0.4489</span> if the game continues to time step <span class="r5">t</span>=<span class="r6">3</span>. Therefore, we can compute the seller&#x27;s optimal price at time
+step <span class="r6">2</span> by calling BackwardOneStep, and then compute the corresponding utility by calling CalcUtil.
+Operation: call function BackwardOneStep with inputs <span class="r5">agent</span>=<span class="r8">&#x27;seller&#x27;</span> <span class="r5">opponent_util_if_rej</span>=<span class="r6">0.4489</span> <span class="r5">time_step</span>=<span class="r6">2</span>
+Result: The SPE price of seller at time step <span class="r6">2</span> is <span class="r6">0.33</span>
+Thought: The SPE price of seller at time step <span class="r6">2</span> is <span class="r6">0.33</span>. Now, I will compute the utility for the seller at this price by
+calling CalcUtil.
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r8">&#x27;seller&#x27;</span> <span class="r5">price</span>=<span class="r6">0.33</span> <span class="r5">time_step</span>=<span class="r6">2</span>
+Result: The utility that seller gets for agreeing on price <span class="r6">0.33</span> at time step <span class="r6">2</span> is <span class="r6">0.2541</span>
+Thought: The utility for the seller at time step <span class="r6">2</span> with the SPE price of <span class="r6">0.33</span> is <span class="r6">0.2541</span>. Now, we move one time step back
+to <span class="r5">t</span>=<span class="r6">1</span>, which is the buyer&#x27;s turn to make an offer. Based on our reasoning for time step <span class="r5">t</span>=<span class="r6">2</span>, the seller would get a 
+utility of <span class="r6">0.2541</span> if the game continues to time step <span class="r5">t</span>=<span class="r6">2</span>. Therefore, we can compute the buyer&#x27;s optimal price at time 
+step <span class="r6">1</span> by calling BackwardOneStep, and then compute the corresponding utility by calling CalcUtil.
+Operation: call function BackwardOneStep with inputs <span class="r5">agent</span>=<span class="r8">&#x27;buyer&#x27;</span> <span class="r5">opponent_util_if_rej</span>=<span class="r6">0.2541</span> <span class="r5">time_step</span>=<span class="r6">1</span>
+Result: The SPE price of buyer at time step <span class="r6">1</span> is <span class="r6">0.2541</span>
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r8">&#x27;seller&#x27;</span> <span class="r5">price</span>=<span class="r6">0.2541</span> <span class="r5">time_step</span>=<span class="r6">1</span>
+Result: The utility that seller gets for agreeing on price <span class="r6">0.2541</span> at time step <span class="r6">1</span> is <span class="r6">0.2541</span>
+Thought: The utility for accepting the price of <span class="r6">0.2541</span> at time step <span class="r6">1</span> is <span class="r6">0.2541</span>. Since the utility I get by accepting 
+the offer is equal to that of rejecting the offer and making a counteroffer at time step <span class="r6">2</span>, I should accept the offer.
+utility accept <span class="r6">0.2541</span>, utility reject <span class="r6">0.2541</span>, seller action accept
+<span class="r3">seller: accept</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+<span class="r3">This episode has ended!</span>
+Performance metric: <span class="r7">[</span><span class="r10">True</span>, <span class="r10">True</span><span class="r7">]</span>
+</code></pre>
+</body>
+</html>

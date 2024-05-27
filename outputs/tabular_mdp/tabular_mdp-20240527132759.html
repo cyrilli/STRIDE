@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #800080; text-decoration-color: #800080}
+.r2 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r3 {color: #800000; text-decoration-color: #800000}
+.r4 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r5 {color: #008080; text-decoration-color: #008080; font-weight: bold}
+.r6 {font-weight: bold}
+.r7 {color: #808000; text-decoration-color: #808000}
+.r8 {color: #800000; text-decoration-color: #800000; font-style: italic}
+.r9 {color: #00ff00; text-decoration-color: #00ff00; font-style: italic}
+body {
+    color: #000000;
+    background-color: #ffffff;
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit">All outputs written to .<span class="r1">/outputs/tabular_mdp/</span><span class="r2">tabular_mdp-20240527132759.html</span>
+<span class="r3">experiment </span><span class="r4">1</span><span class="r3">/</span><span class="r4">1</span><span class="r3"> ...</span>
+<span class="r3">Start to play tabular_mdp</span>
+To agent:
+Now you are going to play in a finite-horizon tabular Markov decision process, with length of horizon <span class="r5">5</span> <span class="r6">(</span>with time 
+indices starting from <span class="r7">h</span>=<span class="r5">0</span> to <span class="r5">4</span><span class="r6">)</span>, number of states |S|=<span class="r5">3</span>, number of actions |A|=<span class="r5">3</span>. The transition matrix P is:
+<span class="r6">[[[</span><span class="r5">0.00</span> <span class="r5">1.00</span> <span class="r5">0.00</span><span class="r6">]</span>
+  <span class="r6">[</span><span class="r5">1.00</span> <span class="r5">0.00</span> <span class="r5">0.00</span><span class="r6">]</span>
+  <span class="r6">[</span><span class="r5">0.00</span> <span class="r5">0.00</span> <span class="r5">1.00</span><span class="r6">]]</span>
+
+ <span class="r6">[[</span><span class="r5">0.28</span> <span class="r5">0.38</span> <span class="r5">0.34</span><span class="r6">]</span>
+  <span class="r6">[</span><span class="r5">0.00</span> <span class="r5">1.00</span> <span class="r5">0.00</span><span class="r6">]</span>
+  <span class="r6">[</span><span class="r5">0.31</span> <span class="r5">0.32</span> <span class="r5">0.37</span><span class="r6">]]</span>
+
+ <span class="r6">[[</span><span class="r5">1.00</span> <span class="r5">0.00</span> <span class="r5">0.00</span><span class="r6">]</span>
+  <span class="r6">[</span><span class="r5">1.00</span> <span class="r5">0.00</span> <span class="r5">0.00</span><span class="r6">]</span>
+  <span class="r6">[</span><span class="r5">0.81</span> <span class="r5">0.00</span> <span class="r5">0.19</span><span class="r6">]]]</span>
+and reward matrix R is
+<span class="r6">[[</span><span class="r5">-0.76</span> <span class="r5">-0.78</span>  <span class="r5">0.49</span><span class="r6">]</span>
+ <span class="r6">[</span> <span class="r5">0.17</span>  <span class="r5">1.00</span>  <span class="r5">0.93</span><span class="r6">]</span>
+ <span class="r6">[</span><span class="r5">-0.73</span>  <span class="r5">0.85</span> <span class="r5">-0.47</span><span class="r6">]]</span>
+
+<span class="r3">episode </span><span class="r4">1</span><span class="r3">/</span><span class="r4">1</span><span class="r3"> ...</span>
+Question: Now compute the optimal policy, that is, the optimal action at each step and each state.
+Thought: We can compute the optimal policy by value iteration, which iterates from the last time step <span class="r5">4</span> back to the 
+first time step <span class="r5">0</span>. At the last time step <span class="r5">4</span>, since the episode terminates at this step, the one-step lookahead is zero. 
+Thus the Q values simply equal the immediate reward of each state-action pair. To compute the Q values, we only need to 
+call function UpdateQbyR to add the immediate rewards. Then the V values can be computed by calling UpdateV, which takes
+the maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">4</span>
+Result: Q values for time step <span class="r5">4</span> are updated with the immediate rewards and stored in the working memory.
+Thought: Now we need to compute the V values for time step <span class="r5">4</span> based on the computed Q values. This can be done by calling
+the function UpdateV, which takes the maximum of the Q values over actions.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">4</span>
+Result: V values for time step <span class="r5">4</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">3</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step lookahead
+by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the maximum of the Q 
+values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">3</span>
+Result: Q values for time step <span class="r5">3</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">3</span>
+Result: Q values for time step <span class="r5">3</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">3</span>
+Result: V values for time step <span class="r5">3</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">2</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step lookahead
+by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the maximum of the Q 
+values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">2</span>
+Result: Q values for time step <span class="r5">2</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">2</span>
+Result: Q values for time step <span class="r5">2</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">2</span>
+Result: V values for time step <span class="r5">2</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">1</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step lookahead
+by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the maximum of the Q 
+values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">1</span>
+Result: Q values for time step <span class="r5">1</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">1</span>
+Result: Q values for time step <span class="r5">1</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">1</span>
+Result: V values for time step <span class="r5">1</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">0</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step lookahead
+by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the maximum of the Q 
+values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">0</span>
+Result: Q values for time step <span class="r5">0</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">0</span>
+Result: Q values for time step <span class="r5">0</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">0</span>
+Result: V values for time step <span class="r5">0</span> are updated based on the computed Q values and stored in the working memory.
+Thought: The Q values from the last time step <span class="r5">4</span> to time step <span class="r5">0</span> have now been calculated. We should exit the reasoning 
+process.
+<span class="r3">This is time step </span><span class="r4">0</span><span class="r3">, the current state is </span><span class="r4">0</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">0</span>, the current state is <span class="r5">0</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">0</span>, and time step, which is <span class="r5">0</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">0</span> <span class="r7">state</span>=<span class="r5">0</span>
+Result: <span class="r6">[</span><span class="r5">3.2409</span> <span class="r5">1.8958</span> <span class="r5">3.1673</span><span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">3.2409</span>, <span class="r5">1.8958</span>, <span class="r5">3.1673</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">3.2409</span>, <span class="r5">1.8958</span>, <span class="r5">3.1673</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">0</span><span class="r6">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r5">0</span>, as it maximizes the Q value <span class="r6">(</span>break the tie randomly 
+if there are multiple maximums<span class="r6">)</span>.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">3.24093227</span> <span class="r5">1.89577418</span> <span class="r5">3.16732116</span><span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">0</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">1</span><span class="r3">, the current state is </span><span class="r4">1</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">1</span>, the current state is <span class="r5">1</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">1</span>, and time step, which is <span class="r5">1</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">1</span> <span class="r7">state</span>=<span class="r5">1</span>
+Result: <span class="r6">[</span><span class="r5">2.5578</span> <span class="r5">3.9988</span> <span class="r5">3.2631</span><span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">2.5578</span>, <span class="r5">3.9988</span>, <span class="r5">3.2631</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">2.5578</span>, <span class="r5">3.9988</span>, <span class="r5">3.2631</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span><span class="r6">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r5">1</span>, as it maximizes the Q value <span class="r6">(</span>break the tie randomly 
+if there are multiple maximums<span class="r6">)</span>.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">2.55775615</span> <span class="r5">3.99876671</span> <span class="r5">3.26306037</span><span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">2</span><span class="r3">, the current state is </span><span class="r4">1</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">2</span>, the current state is <span class="r5">1</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">1</span>, and time step, which is <span class="r5">2</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">2</span> <span class="r7">state</span>=<span class="r5">1</span>
+Result: <span class="r6">[</span><span class="r5">1.7528</span> <span class="r5">2.9991</span> <span class="r5">2.4786</span><span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">1.7528</span>, <span class="r5">2.9991</span>, <span class="r5">2.4786</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">1.7528</span>, <span class="r5">2.9991</span>, <span class="r5">2.4786</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span><span class="r6">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r5">1</span>, as it maximizes the Q value <span class="r6">(</span>break the tie randomly 
+if there are multiple maximums<span class="r6">)</span>.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">1.75281602</span> <span class="r5">2.99907503</span> <span class="r5">2.47859144</span><span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">3</span><span class="r3">, the current state is </span><span class="r4">1</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">3</span>, the current state is <span class="r5">1</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">1</span>, and time step, which is <span class="r5">3</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">3</span> <span class="r7">state</span>=<span class="r5">1</span>
+Result: <span class="r6">[</span><span class="r5">0.9711</span> <span class="r5">1.9994</span> <span class="r5">1.7163</span><span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">0.9711</span>, <span class="r5">1.9994</span>, <span class="r5">1.7163</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">0.9711</span>, <span class="r5">1.9994</span>, <span class="r5">1.7163</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span><span class="r6">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r5">1</span>, as it maximizes the Q value <span class="r6">(</span>break the tie randomly 
+if there are multiple maximums<span class="r6">)</span>.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">0.9711433</span>  <span class="r5">1.99938335</span> <span class="r5">1.71633106</span><span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">4</span><span class="r3">, the current state is </span><span class="r4">1</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">4</span>, the current state is <span class="r5">1</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">1</span>, and time step, which is <span class="r5">4</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">4</span> <span class="r7">state</span>=<span class="r5">1</span>
+Result: <span class="r6">[</span><span class="r5">0.1662</span> <span class="r5">0.9997</span> <span class="r5">0.9319</span><span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">0.1662</span>, <span class="r5">0.9997</span>, <span class="r5">0.9319</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">0.1662</span>, <span class="r5">0.9997</span>, <span class="r5">0.9319</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span><span class="r6">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r5">1</span>, as it maximizes the Q value <span class="r6">(</span>break the tie randomly 
+if there are multiple maximums<span class="r6">)</span>.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">0.16620317</span> <span class="r5">0.99969168</span> <span class="r5">0.93186213</span><span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This episode has ended!</span>
+Performance metric: <span class="r6">[</span><span class="r9">True</span>, <span class="r9">True</span>, <span class="r9">True</span>, <span class="r9">True</span>, <span class="r9">True</span><span class="r6">]</span>
+</code></pre>
+</body>
+</html>

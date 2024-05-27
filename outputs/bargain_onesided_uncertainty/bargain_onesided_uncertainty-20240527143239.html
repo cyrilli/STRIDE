@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #800080; text-decoration-color: #800080}
+.r2 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r3 {color: #800000; text-decoration-color: #800000}
+.r4 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r5 {color: #808000; text-decoration-color: #808000}
+.r6 {color: #008080; text-decoration-color: #008080; font-weight: bold}
+.r7 {font-weight: bold}
+.r8 {color: #800000; text-decoration-color: #800000; font-style: italic}
+.r9 {color: #008000; text-decoration-color: #008000}
+.r10 {color: #00ff00; text-decoration-color: #00ff00; font-style: italic}
+body {
+    color: #000000;
+    background-color: #ffffff;
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit">All outputs written to .<span class="r1">/outputs/bargain_onesided_uncertainty/</span><span class="r2">bargain_onesided_uncertainty-20240527143239.html</span>
+<span class="r3">experiment </span><span class="r4">1</span><span class="r3">/</span><span class="r4">1</span><span class="r3"> ...</span>
+<span class="r3">Start to play bargain_onesided_uncertainty</span>
+<span class="r3">episode </span><span class="r4">1</span><span class="r3">/</span><span class="r4">1</span><span class="r3"> ...</span>
+To buyer:
+This is the beginning of a new game instance, where you will play as the buyer. Your discount factor <span class="r5">delta_b</span>=<span class="r6">0.66</span>, 
+seller&#x27;s discount factor <span class="r5">delta_s</span>=<span class="r6">0.88</span>, and the deadline <span class="r5">T</span>=<span class="r6">3</span>. Your value <span class="r5">b</span>=<span class="r6">0.85</span>, which is uniformly sampled from <span class="r7">[</span><span class="r6">0</span>,<span class="r6">1</span><span class="r7">]</span>
+To seller:
+This is the beginning of a new game instance, where you will play as the seller. Your discount factor <span class="r5">delta_s</span>=<span class="r6">0.88</span>, 
+buyer&#x27;s discount factor <span class="r5">delta_b</span>=<span class="r6">0.66</span>, and the deadline <span class="r5">T</span>=<span class="r6">3</span>. The buyer&#x27;s value b is unknown to you, but you know it is 
+uniformly sampled from <span class="r7">[</span><span class="r6">0</span>,<span class="r6">1</span><span class="r7">]</span>
+<span class="r3">This is time step </span><span class="r4">1</span><span class="r3">. Now seller needs to propose a price in the range of </span><span class="r4">[</span><span class="r4">0.0</span><span class="r3">, </span><span class="r4">1.0</span><span class="r4">]</span><span class="r3"> to the buyer.</span>
+Question: This is time step <span class="r6">1</span>. Now seller needs to propose a price in the range of <span class="r7">[</span><span class="r6">0.0</span>, <span class="r6">1.0</span><span class="r7">]</span> to the buyer.
+Thought: To decide my price at the current time step <span class="r6">1</span>, I need to first compute my belief about buyer&#x27;s value at time 
+step T-<span class="r6">1</span> under sequential equilibrium. I can achieve this via bisection search that terminates when I get close enough 
+<span class="r7">(</span>the difference is smaller than <span class="r6">0.01</span><span class="r7">)</span> to the actual value of my current belief <span class="r6">1.0</span>. Buyer&#x27;s value is in the range of 
+<span class="r7">[</span><span class="r6">0</span>,<span class="r6">1</span><span class="r7">]</span>, so I should start with <span class="r7">(</span><span class="r6">0</span>+<span class="r6">1</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2</span>=<span class="r6">0.5</span>. Then I should call function ComputeBt to compute what my current belief about
+buyer&#x27;s value would be, assuming that my belief at time step T-<span class="r6">1</span> is <span class="r6">0.5</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.5</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.5</span>, then the current belief should be <span class="r6">0.9027531922669798</span>
+Thought: Since the computed value of my current belief <span class="r6">0.9027531922669798</span> is smaller than the actual value of my current
+belief <span class="r6">1.0</span>. In the next iteration, I should focus on the upper half of buyer&#x27;s value range <span class="r7">[</span><span class="r6">0.5</span>, <span class="r6">1.0</span><span class="r7">]</span>, and try 
+<span class="r7">(</span><span class="r6">0.5</span>+<span class="r6">1.0</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.75</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.75</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.75</span>, then the current belief should be <span class="r6">1.3541297884004697</span>
+Thought: Since the computed value of my current belief <span class="r6">1.3541297884004697</span> is larger than the actual value of my current 
+belief <span class="r6">1.0</span>. In the next iteration, I should focus on the lower half of buyer&#x27;s value range <span class="r7">[</span><span class="r6">0.5</span>, <span class="r6">0.75</span><span class="r7">]</span>, and try 
+<span class="r7">(</span><span class="r6">0.5</span>+<span class="r6">0.75</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.625</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.625</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.625</span>, then the current belief should be <span class="r6">1.1284414903337248</span>
+Thought: Since the computed value of my current belief <span class="r6">1.1284414903337248</span> is larger than the actual value of my current 
+belief <span class="r6">1.0</span>. In the next iteration, I should focus on the lower half of buyer&#x27;s value range <span class="r7">[</span><span class="r6">0.5</span>, <span class="r6">0.625</span><span class="r7">]</span>, and try 
+<span class="r7">(</span><span class="r6">0.5</span>+<span class="r6">0.625</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.5625</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.5625</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.5625</span>, then the current belief should be <span class="r6">1.0155973413003523</span>
+Thought: Since the computed value of my current belief <span class="r6">1.0155973413003523</span> is larger than the actual value of my current 
+belief <span class="r6">1.0</span>. In the next iteration, I should focus on the lower half of buyer&#x27;s value range <span class="r7">[</span><span class="r6">0.5</span>, <span class="r6">0.5625</span><span class="r7">]</span>, and try 
+<span class="r7">(</span><span class="r6">0.5</span>+<span class="r6">0.5625</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.53125</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.53125</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.53125</span>, then the current belief should be <span class="r6">0.959175266783666</span>
+Thought: Since the computed value of my current belief <span class="r6">0.959175266783666</span> is smaller than the actual value of my current 
+belief <span class="r6">1.0</span>. In the next iteration, I should focus on the upper half of buyer&#x27;s value range <span class="r7">[</span><span class="r6">0.53125</span>, <span class="r6">0.5625</span><span class="r7">]</span>, and try 
+<span class="r7">(</span><span class="r6">0.53125</span>+<span class="r6">0.5625</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.546875</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.546875</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.546875</span>, then the current belief should be <span class="r6">0.9873863040420092</span>
+Thought: Since the computed value of my current belief <span class="r6">0.9873863040420092</span> is smaller than the actual value of my current
+belief <span class="r6">1.0</span>. In the next iteration, I should focus on the upper half of buyer&#x27;s value range <span class="r7">[</span><span class="r6">0.546875</span>, <span class="r6">0.5625</span><span class="r7">]</span>, and try 
+<span class="r7">(</span><span class="r6">0.546875</span>+<span class="r6">0.5625</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.5546875</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.5546875</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.5546875</span>, then the current belief should be <span class="r6">1.0014918226711806</span>
+Thought: Since |<span class="r6">1.0014918226711806</span>-<span class="r6">1.0</span>| &lt; <span class="r6">0.01</span>, the computed value of my current belief is close enough to the actual 
+value now. Therefore, <span class="r6">0.5546875</span> is an accurate approximation of my belief about buyer&#x27;s value at time step T-<span class="r6">1</span>.
+
+Now I can start reasoning backward from the last time step <span class="r6">3</span> to the current time step <span class="r6">1</span> to compute the price I should 
+offer at current time step <span class="r6">1</span>.
+Operation: call function SolveLast with inputs <span class="r5">b_last</span>=<span class="r6">0.5546875</span>
+Result: At the last time step <span class="r6">3</span>, seller&#x27;s expected utility is <span class="r6">0.1073875</span> and the corresponding price is <span class="r6">0.27734375</span>
+Thought: Now I need to continue to time step <span class="r6">2</span>.
+Operation: call function Solve with inputs <span class="r5">u_t</span>=<span class="r6">0.1073875</span> <span class="r5">p_t</span>=<span class="r6">0.27734375</span> <span class="r5">t</span>=<span class="r6">2</span>
+Result: At time step <span class="r6">2</span>, seller&#x27;s expected utility is <span class="r6">0.14548650233333335</span> and the corresponding price is 
+<span class="r6">0.37164062499999995</span>
+Thought: Now I need to continue to time step <span class="r6">1</span>.
+Operation: call function Solve with inputs <span class="r5">u_t</span>=<span class="r6">0.14548650233333335</span> <span class="r5">p_t</span>=<span class="r6">0.37164062499999995</span> <span class="r5">t</span>=<span class="r6">1</span>
+Result: At time step <span class="r6">1</span>, seller&#x27;s expected utility is <span class="r6">0.22290175695223183</span> and the corresponding price is 
+<span class="r6">0.49861770055970145</span>
+Thought: I have reached the current time step <span class="r6">1</span>. Offering the price of <span class="r6">0.49861770055970145</span> would maximize my utility, so
+I can exit reasoning now.
+spe price <span class="r6">0.4978749594078437</span>
+<span class="r3">seller: </span><span class="r4">0.49861770055970145</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">1</span><span class="r3">. Seller has offered a price of </span><span class="r4">0.49861770055970145</span><span class="r3"> to the buyer. Now the buyer needs to decide </span>
+<span class="r3">whether to accept it or reject it</span>
+Question: This is time step <span class="r6">1</span>. Seller has offered a price of <span class="r6">0.49861770055970145</span> to the buyer. Now the buyer needs to 
+decide whether to accept it or reject it
+Thought: To make this decision, I need to first reason about the utility I can get by accepting the offer now, and the 
+utility I can get by rejecting it and waiting for the next time step.
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r9">&#x27;buyer&#x27;</span> <span class="r5">price</span>=<span class="r6">0.49861770055970145</span> <span class="r5">time_step</span>=<span class="r6">1</span>
+Result: The utility that buyer gets for agreeing on price <span class="r6">0.49861770055970145</span> at time step <span class="r6">1</span> is <span class="r6">0.3514</span>
+Thought: Now, to know the utility I can get by rejecting the offer at current time step <span class="r6">1</span> and waiting for seller&#x27;s new 
+offer at time step <span class="r6">2</span>, I need to first compute what seller&#x27;s belief at time step T-<span class="r6">1</span> about my value would be. I can 
+achieve this via bisection search that terminates when I get close enough <span class="r7">(</span>the difference is smaller than <span class="r6">0.01</span><span class="r7">)</span> to the 
+actual value of seller&#x27;s current belief <span class="r6">1.0</span>. My value is in the range of <span class="r7">[</span><span class="r6">0</span>,<span class="r6">1</span><span class="r7">]</span>, so I should start with <span class="r7">(</span><span class="r6">0</span>+<span class="r6">1</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2</span>=<span class="r6">0.5</span>. Then
+I should call function ComputeBt to compute what seller&#x27;s current belief about my value would be, assuming that seller&#x27;s
+belief at time step T-<span class="r6">1</span> is <span class="r6">0.5</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.5</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.5</span>, then the current belief should be <span class="r6">0.9027531922669798</span>
+Thought: Since the computed value of seller&#x27;s current belief <span class="r6">0.9027531922669798</span> is smaller than the actual value of 
+seller&#x27;s current belief <span class="r6">1.0</span>. In next iteration, I should focus on the upper half of my value range <span class="r7">[</span><span class="r6">0.5</span>, <span class="r6">1</span><span class="r7">]</span>, and try 
+<span class="r7">(</span><span class="r6">0.5</span>+<span class="r6">1</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.75</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.75</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.75</span>, then the current belief should be <span class="r6">1.3541297884004697</span>
+Thought: Since the computed value of seller&#x27;s current belief <span class="r6">1.3541297884004697</span> is larger than the actual value of 
+seller&#x27;s current belief <span class="r6">1.0</span>. In next iteration, I should focus on the lower half of my value range <span class="r7">[</span><span class="r6">0.5</span>, <span class="r6">0.75</span><span class="r7">]</span>, and try 
+<span class="r7">(</span><span class="r6">0.5</span>+<span class="r6">0.75</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.625</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.625</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.625</span>, then the current belief should be <span class="r6">1.1284414903337248</span>
+Thought: Since the computed value of seller&#x27;s current belief <span class="r6">1.1284414903337248</span> is larger than the actual value of 
+seller&#x27;s current belief <span class="r6">1.0</span>. In next iteration, I should focus on the lower half of my value range <span class="r7">[</span><span class="r6">0.5</span>, <span class="r6">0.625</span><span class="r7">]</span>, and try
+<span class="r7">(</span><span class="r6">0.5</span>+<span class="r6">0.625</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.5625</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.5625</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.5625</span>, then the current belief should be <span class="r6">1.0155973413003523</span>
+Thought: Since the computed value of seller&#x27;s current belief <span class="r6">1.0155973413003523</span> is larger than the actual value of 
+seller&#x27;s current belief <span class="r6">1.0</span>. In next iteration, I should focus on the lower half of my value range <span class="r7">[</span><span class="r6">0.5</span>, <span class="r6">0.5625</span><span class="r7">]</span>, and 
+try <span class="r7">(</span><span class="r6">0.5</span>+<span class="r6">0.5625</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.53125</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.53125</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.53125</span>, then the current belief should be <span class="r6">0.959175266783666</span>
+Thought: Since the computed value of seller&#x27;s current belief <span class="r6">0.959175266783666</span> is smaller than the actual value of 
+seller&#x27;s current belief <span class="r6">1.0</span>. In next iteration, I should focus on the upper half of my value range <span class="r7">[</span><span class="r6">0.53125</span>, <span class="r6">0.5625</span><span class="r7">]</span>, 
+and try <span class="r7">(</span><span class="r6">0.53125</span>+<span class="r6">0.5625</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.546875</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.546875</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.546875</span>, then the current belief should be <span class="r6">0.9873863040420092</span>
+Thought: Since the computed value of seller&#x27;s current belief <span class="r6">0.9873863040420092</span> is smaller than the actual value of 
+seller&#x27;s current belief <span class="r6">1.0</span>. In next iteration, I should focus on the upper half of my value range <span class="r7">[</span><span class="r6">0.546875</span>, <span class="r6">0.5625</span><span class="r7">]</span>, 
+and try <span class="r7">(</span><span class="r6">0.546875</span>+<span class="r6">0.5625</span><span class="r7">)</span><span class="r1">/</span><span class="r2">2.</span><span class="r2">0</span>=<span class="r6">0.5546875</span>.
+Operation: call function ComputeBt with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">b_last</span>=<span class="r6">0.5546875</span>
+Result: If seller&#x27;s belief at time step T-<span class="r6">1</span> is <span class="r6">0.5546875</span>, then the current belief should be <span class="r6">1.0014918226711806</span>
+Thought: Since |<span class="r6">1.0014918226711806</span>-<span class="r6">1.0</span>| &lt; <span class="r6">0.01</span>, the computed value of seller&#x27;s current belief is close enough to the 
+actual value now. Therefore, <span class="r6">0.5546875</span> is an accurate approximation of seller&#x27;s belief about my value at time step T-<span class="r6">1</span>.
+Operation: call function SolveLast with inputs <span class="r5">b_last</span>=<span class="r6">0.5546875</span>
+Result: At the last time step <span class="r6">3</span>, seller&#x27;s expected utility is <span class="r6">0.1073875</span> and the corresponding price is <span class="r6">0.27734375</span>
+Thought: Now I need to continue to time step <span class="r6">2</span>.
+Operation: call function Solve with inputs <span class="r5">u_t</span>=<span class="r6">0.1073875</span> <span class="r5">p_t</span>=<span class="r6">0.27734375</span> <span class="r5">t</span>=<span class="r6">2</span>
+Result: At time step <span class="r6">2</span>, seller&#x27;s expected utility is <span class="r6">0.14548650233333335</span> and the corresponding price is 
+<span class="r6">0.37164062499999995</span>
+Thought: I have reached the next time step <span class="r6">2</span>. Seller will offer a price of <span class="r6">0.37164062499999995</span> in the next time step. 
+Now I need to calculate my utility if I accept this price at the next time step <span class="r6">2</span>.
+Operation: call function CalcUtil with inputs <span class="r5">agent</span>=<span class="r9">&#x27;buyer&#x27;</span> <span class="r5">price</span>=<span class="r6">0.37164062499999995</span> <span class="r5">time_step</span>=<span class="r6">2</span>
+Result: The utility that buyer gets for agreeing on price <span class="r6">0.37164062499999995</span> at time step <span class="r6">2</span> is <span class="r6">0.3157</span>
+Thought: Since the utility of accepting seller&#x27;s offer at the current time step <span class="r6">1</span>, which is <span class="r6">0.3514</span>, is greater than the 
+utility of waiting for seller&#x27;s offer at next time step <span class="r6">2</span>, which is <span class="r6">0.3157</span>, I should accept the offer.
+utility accept <span class="r6">0.35138229944029853</span>, utility reject <span class="r6">0.31608256088823444</span>, buyer action accept
+<span class="r3">buyer: accept</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This episode has ended!</span>
+Performance metric: <span class="r7">[</span><span class="r10">True</span>, <span class="r10">True</span><span class="r7">]</span>
+</code></pre>
+</body>
+</html>

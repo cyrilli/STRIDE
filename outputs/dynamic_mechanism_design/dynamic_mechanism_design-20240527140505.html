@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #800080; text-decoration-color: #800080}
+.r2 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r3 {color: #800000; text-decoration-color: #800000}
+.r4 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r5 {color: #808000; text-decoration-color: #808000}
+.r6 {color: #008080; text-decoration-color: #008080; font-weight: bold}
+.r7 {font-weight: bold}
+.r8 {color: #800080; text-decoration-color: #800080; font-style: italic}
+.r9 {color: #800000; text-decoration-color: #800000; font-style: italic}
+.r10 {color: #00ff00; text-decoration-color: #00ff00; font-style: italic}
+body {
+    color: #000000;
+    background-color: #ffffff;
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit">All outputs written to .<span class="r1">/outputs/dynamic_mechanism_design/</span><span class="r2">dynamic_mechanism_design-20240527140505.html</span>
+<span class="r3">experiment </span><span class="r4">1</span><span class="r3">/</span><span class="r4">1</span><span class="r3"> ...</span>
+<span class="r3">Start to play dynamic_mechanism_design</span>
+<span class="r3">episode </span><span class="r4">1</span><span class="r3">/</span><span class="r4">1</span><span class="r3"> ...</span>
+To designer:
+Now you are going to play in a finite-horizon dynamic mechanism design problem, with number of agents <span class="r5">N</span>=<span class="r6">4</span>, length of 
+horizon <span class="r6">6</span> <span class="r7">(</span>with time indices starting from <span class="r5">h</span>=<span class="r6">0</span> to <span class="r6">5</span><span class="r7">)</span>, number of states |S|=<span class="r6">3</span>, number of actions |A|=<span class="r6">3</span>. The transition 
+matrix P is:
+<span class="r7">[[[</span><span class="r6">0.00</span> <span class="r6">1.00</span> <span class="r6">0.00</span><span class="r7">]</span>
+  <span class="r7">[</span><span class="r6">0.02</span> <span class="r6">0.18</span> <span class="r6">0.80</span><span class="r7">]</span>
+  <span class="r7">[</span><span class="r6">0.44</span> <span class="r6">0.10</span> <span class="r6">0.46</span><span class="r7">]]</span>
+
+ <span class="r7">[[</span><span class="r6">0.33</span> <span class="r6">0.31</span> <span class="r6">0.36</span><span class="r7">]</span>
+  <span class="r7">[</span><span class="r6">0.26</span> <span class="r6">0.44</span> <span class="r6">0.30</span><span class="r7">]</span>
+  <span class="r7">[</span><span class="r6">0.00</span> <span class="r6">1.00</span> <span class="r6">0.00</span><span class="r7">]]</span>
+
+ <span class="r7">[[</span><span class="r6">0.00</span> <span class="r6">1.00</span> <span class="r6">0.00</span><span class="r7">]</span>
+  <span class="r7">[</span><span class="r6">0.00</span> <span class="r6">0.98</span> <span class="r6">0.02</span><span class="r7">]</span>
+  <span class="r7">[</span><span class="r6">0.00</span> <span class="r6">1.00</span> <span class="r6">0.00</span><span class="r7">]]]</span>
+and reward matrix R reported by the agents is
+<span class="r7">[[[</span><span class="r6">-0.15</span>  <span class="r6">0.37</span>  <span class="r6">0.91</span><span class="r7">]</span>
+  <span class="r7">[</span> <span class="r6">0.31</span>  <span class="r6">0.94</span> <span class="r6">-0.92</span><span class="r7">]</span>
+  <span class="r7">[</span> <span class="r6">0.01</span> <span class="r6">-0.80</span>  <span class="r6">0.66</span><span class="r7">]]</span>
+
+ <span class="r7">[[</span> <span class="r6">0.93</span>  <span class="r6">0.32</span> <span class="r6">-0.66</span><span class="r7">]</span>
+  <span class="r7">[</span> <span class="r6">0.98</span>  <span class="r6">0.28</span>  <span class="r6">0.97</span><span class="r7">]</span>
+  <span class="r7">[</span> <span class="r6">0.77</span> <span class="r6">-0.63</span>  <span class="r6">0.45</span><span class="r7">]]</span>
+
+ <span class="r7">[[</span><span class="r6">-0.74</span> <span class="r6">-0.13</span> <span class="r6">-0.78</span><span class="r7">]</span>
+  <span class="r7">[</span> <span class="r6">0.02</span> <span class="r6">-0.21</span>  <span class="r6">0.25</span><span class="r7">]</span>
+  <span class="r7">[</span><span class="r6">-0.03</span> <span class="r6">-0.77</span> <span class="r6">-0.08</span><span class="r7">]]</span>
+
+ <span class="r7">[[</span><span class="r6">-0.58</span> <span class="r6">-0.02</span>  <span class="r6">0.21</span><span class="r7">]</span>
+  <span class="r7">[</span> <span class="r6">0.74</span>  <span class="r6">0.72</span> <span class="r6">-0.86</span><span class="r7">]</span>
+  <span class="r7">[</span><span class="r6">-0.58</span> <span class="r6">-0.99</span>  <span class="r6">0.56</span><span class="r7">]]]</span>
+
+Question: Now compute the optimal policy that maximizes all agents&#x27; rewards.
+Thought: We can compute the optimal policy by value iteration, which iterates from the last time step <span class="r6">5</span> back to the 
+first time step <span class="r6">0</span>. At the last time step <span class="r6">5</span>, since the episode terminates at this step, the one-step lookahead is zero. 
+Thus the Q values simply equal the immediate reward of each state-action pair. To compute the Q values, we only need to 
+call function UpdateQbyRExcluding and add the immediate rewards of all agents. Then the V values can be computed by 
+calling UpdateVExcluding, which takes the maximum of the Q values over actions.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">5</span> are updated using all agents&#x27; immediate rewards and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: V values for time step <span class="r6">5</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r6">4</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards of all agents by calling function UpdateQbyRExcluding. Second, add
+the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding, which takes the maximum of the Q values over actions.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">4</span> are updated using all agents&#x27; immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: V values for time step <span class="r6">4</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r6">3</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards of all agents by calling function UpdateQbyRExcluding. Second, add
+the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding, which takes the maximum of the Q values over actions.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">3</span> are updated using all agents&#x27; immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: V values for time step <span class="r6">3</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r6">2</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards of all agents by calling function UpdateQbyRExcluding. Second, add
+the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding, which takes the maximum of the Q values over actions.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">2</span> are updated using all agents&#x27; immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: V values for time step <span class="r6">2</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r6">1</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards of all agents by calling function UpdateQbyRExcluding. Second, add
+the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding, which takes the maximum of the Q values over actions.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">1</span> are updated using all agents&#x27; immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: V values for time step <span class="r6">1</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r6">0</span>. Using the idea of dynamic programming, we compute the Q 
+values in two steps. First, add the immediate rewards of all agents by calling function UpdateQbyRExcluding. Second, add
+the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding, which takes the maximum of the Q values over actions.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">0</span> are updated using all agents&#x27; immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: V values for time step <span class="r6">0</span> are updated based on the computed Q values and stored in the working memory.
+Thought: The Q values from the last time step <span class="r6">5</span> to time step <span class="r6">0</span> have now been calculated. We should exit the reasoning 
+process.
+<span class="r3">This is time step </span><span class="r4">0</span><span class="r3">, the current state is </span><span class="r4">0</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the mechanism designer should take?</span>
+Question: This is time step <span class="r6">0</span>, the current state is <span class="r6">0</span>, and the available actions are <span class="r7">[</span><span class="r6">0</span>, <span class="r6">1</span>, <span class="r6">2</span><span class="r7">]</span>.
+Question: Now which action the mechanism designer should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r6">0</span>, and time step, which is <span class="r6">0</span>.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">state</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: <span class="r7">[</span><span class="r6">7.9017</span> <span class="r6">8.9358</span> <span class="r6">7.5962</span><span class="r7">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r7">[</span><span class="r6">7.9017</span>, <span class="r6">8.9358</span>, <span class="r6">7.5962</span><span class="r7">]</span>.
+Operation: call function GetArgMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">7.9017</span>, <span class="r6">8.9358</span>, <span class="r6">7.5962</span><span class="r7">]</span>
+Result: <span class="r7">[</span><span class="r6">1</span><span class="r7">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r6">1</span>, as it maximizes the Q value <span class="r7">(</span>break the tie randomly 
+if there are multiple maximums<span class="r7">)</span>.
+q_optimal for current step and state <span class="r7">[</span><span class="r6">7.9016609</span>  <span class="r6">8.93578257</span> <span class="r6">7.59618674</span><span class="r7">]</span>
+<span class="r3">designer: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+<span class="r3">This is time step </span><span class="r4">1</span><span class="r3">, the current state is </span><span class="r4">2</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the mechanism designer should take?</span>
+Question: This is time step <span class="r6">1</span>, the current state is <span class="r6">2</span>, and the available actions are <span class="r7">[</span><span class="r6">0</span>, <span class="r6">1</span>, <span class="r6">2</span><span class="r7">]</span>.
+Question: Now which action the mechanism designer should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r6">2</span>, and time step, which is <span class="r6">1</span>.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">state</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: <span class="r7">[</span><span class="r6">6.9968</span> <span class="r6">3.6206</span> <span class="r6">8.4155</span><span class="r7">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r7">[</span><span class="r6">6.9968</span>, <span class="r6">3.6206</span>, <span class="r6">8.4155</span><span class="r7">]</span>.
+Operation: call function GetArgMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">6.9968</span>, <span class="r6">3.6206</span>, <span class="r6">8.4155</span><span class="r7">]</span>
+Result: <span class="r7">[</span><span class="r6">2</span><span class="r7">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r6">2</span>, as it maximizes the Q value <span class="r7">(</span>break the tie randomly 
+if there are multiple maximums<span class="r7">)</span>.
+q_optimal for current step and state <span class="r7">[</span><span class="r6">6.99680587</span> <span class="r6">3.62055332</span> <span class="r6">8.41554255</span><span class="r7">]</span>
+<span class="r3">designer: </span><span class="r4">2</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+<span class="r3">This is time step </span><span class="r4">2</span><span class="r3">, the current state is </span><span class="r4">1</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the mechanism designer should take?</span>
+Question: This is time step <span class="r6">2</span>, the current state is <span class="r6">1</span>, and the available actions are <span class="r7">[</span><span class="r6">0</span>, <span class="r6">1</span>, <span class="r6">2</span><span class="r7">]</span>.
+Question: Now which action the mechanism designer should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r6">1</span>, and time step, which is <span class="r6">2</span>.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">state</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: <span class="r7">[</span><span class="r6">6.8174</span> <span class="r6">6.5814</span> <span class="r6">4.5832</span><span class="r7">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r7">[</span><span class="r6">6.8174</span>, <span class="r6">6.5814</span>, <span class="r6">4.5832</span><span class="r7">]</span>.
+Operation: call function GetArgMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">6.8174</span>, <span class="r6">6.5814</span>, <span class="r6">4.5832</span><span class="r7">]</span>
+Result: <span class="r7">[</span><span class="r6">0</span><span class="r7">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r6">0</span>, as it maximizes the Q value <span class="r7">(</span>break the tie randomly 
+if there are multiple maximums<span class="r7">)</span>.
+q_optimal for current step and state <span class="r7">[</span><span class="r6">6.81743108</span> <span class="r6">6.58144677</span> <span class="r6">4.58315149</span><span class="r7">]</span>
+<span class="r3">designer: </span><span class="r4">0</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+<span class="r3">This is time step </span><span class="r4">3</span><span class="r3">, the current state is </span><span class="r4">0</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the mechanism designer should take?</span>
+Question: This is time step <span class="r6">3</span>, the current state is <span class="r6">0</span>, and the available actions are <span class="r7">[</span><span class="r6">0</span>, <span class="r6">1</span>, <span class="r6">2</span><span class="r7">]</span>.
+Question: Now which action the mechanism designer should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r6">0</span>, and time step, which is <span class="r6">3</span>.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">state</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: <span class="r7">[</span><span class="r6">2.9072</span> <span class="r6">4.1228</span> <span class="r6">2.6692</span><span class="r7">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r7">[</span><span class="r6">2.9072</span>, <span class="r6">4.1228</span>, <span class="r6">2.6692</span><span class="r7">]</span>.
+Operation: call function GetArgMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">2.9072</span>, <span class="r6">4.1228</span>, <span class="r6">2.6692</span><span class="r7">]</span>
+Result: <span class="r7">[</span><span class="r6">1</span><span class="r7">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r6">1</span>, as it maximizes the Q value <span class="r7">(</span>break the tie randomly 
+if there are multiple maximums<span class="r7">)</span>.
+q_optimal for current step and state <span class="r7">[</span><span class="r6">2.90718715</span> <span class="r6">4.12281783</span> <span class="r6">2.66921931</span><span class="r7">]</span>
+<span class="r3">designer: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+<span class="r3">This is time step </span><span class="r4">4</span><span class="r3">, the current state is </span><span class="r4">2</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the mechanism designer should take?</span>
+Question: This is time step <span class="r6">4</span>, the current state is <span class="r6">2</span>, and the available actions are <span class="r7">[</span><span class="r6">0</span>, <span class="r6">1</span>, <span class="r6">2</span><span class="r7">]</span>.
+Question: Now which action the mechanism designer should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r6">2</span>, and time step, which is <span class="r6">4</span>.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">state</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: <span class="r7">[</span> <span class="r6">2.2305</span> <span class="r6">-1.1517</span>  <span class="r6">3.6492</span><span class="r7">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r7">[</span><span class="r6">2.2305</span>, <span class="r6">-1.1517</span>, <span class="r6">3.6492</span><span class="r7">]</span>.
+Operation: call function GetArgMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">2.2305</span>, <span class="r6">-1.1517</span>, <span class="r6">3.6492</span><span class="r7">]</span>
+Result: <span class="r7">[</span><span class="r6">2</span><span class="r7">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r6">2</span>, as it maximizes the Q value <span class="r7">(</span>break the tie randomly 
+if there are multiple maximums<span class="r7">)</span>.
+q_optimal for current step and state <span class="r7">[</span> <span class="r6">2.23050421</span> <span class="r6">-1.1517009</span>   <span class="r6">3.64924089</span><span class="r7">]</span>
+<span class="r3">designer: </span><span class="r4">2</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+<span class="r3">This is time step </span><span class="r4">5</span><span class="r3">, the current state is </span><span class="r4">1</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the mechanism designer should take?</span>
+Question: This is time step <span class="r6">5</span>, the current state is <span class="r6">1</span>, and the available actions are <span class="r7">[</span><span class="r6">0</span>, <span class="r6">1</span>, <span class="r6">2</span><span class="r7">]</span>.
+Question: Now which action the mechanism designer should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r6">1</span>, and time step, which is <span class="r6">5</span>.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">state</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r8">None</span>
+Result: <span class="r7">[</span> <span class="r6">2.0511</span>  <span class="r6">1.7368</span> <span class="r6">-0.5675</span><span class="r7">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r7">[</span><span class="r6">2.0511</span>, <span class="r6">1.7368</span>, <span class="r6">-0.5675</span><span class="r7">]</span>.
+Operation: call function GetArgMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">2.0511</span>, <span class="r6">1.7368</span>, <span class="r6">-0.5675</span><span class="r7">]</span>
+Result: <span class="r7">[</span><span class="r6">0</span><span class="r7">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r6">0</span>, as it maximizes the Q value <span class="r7">(</span>break the tie randomly 
+if there are multiple maximums<span class="r7">)</span>.
+q_optimal for current step and state <span class="r7">[</span> <span class="r6">2.05112942</span>  <span class="r6">1.73675427</span> <span class="r6">-0.56750758</span><span class="r7">]</span>
+<span class="r3">designer: </span><span class="r4">0</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+Question: Now compute the VCG price for agent <span class="r6">0</span>.
+Thought: Step <span class="r6">1</span>: Compute the policy that maximizes the rewards of all agents excluding agent <span class="r6">0</span> by value iteration, which
+iterates from the last time step <span class="r6">5</span> back to the first time step <span class="r6">0</span>. At the last time step <span class="r6">5</span>, since the episode terminates 
+at this step, the one-step lookahead is zero. Thus the Q values simply equal the immediate reward of each state-action 
+pair. To compute the Q values, we only need to add the immediate rewards of all agents excluding agent <span class="r6">0</span> by calling 
+function UpdateQbyRExcluding. Then the V values can be computed by calling UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">5</span> are updated with the immediate rewards excluding agent <span class="r6">0</span> and stored in the working 
+memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: V values for time step <span class="r6">5</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">4</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">0</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the immediate rewards excluding agent <span class="r6">0</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: V values for time step <span class="r6">4</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">3</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">0</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the immediate rewards excluding agent <span class="r6">0</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: V values for time step <span class="r6">3</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">2</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">0</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the immediate rewards excluding agent <span class="r6">0</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: V values for time step <span class="r6">2</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">1</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">0</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the immediate rewards excluding agent <span class="r6">0</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: V values for time step <span class="r6">1</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">0</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">0</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the immediate rewards excluding agent <span class="r6">0</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: V values for time step <span class="r6">0</span> are updated based on the computed Q values and stored in the working memory.
+Thought: The Q values from the last time step <span class="r6">5</span> to time step <span class="r6">0</span> have now been calculated. We need to know the value of 
+initial state <span class="r6">0</span> at time step <span class="r6">0</span>. Let&#x27;s call GetQExcluding to retrieve all Q values and call GetMax to get the state 
+value.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">state</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: <span class="r7">[</span><span class="r6">6.0133</span> <span class="r6">6.3428</span> <span class="r6">4.4898</span><span class="r7">]</span>
+Operation: call function GetMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">6.0133</span>, <span class="r6">6.3428</span>, <span class="r6">4.4898</span><span class="r7">]</span>
+Result: <span class="r6">6.3428</span>
+Thought: Step <span class="r6">2</span>: We need to evaluate the policy that maximizes all agents&#x27; reward on the MDP that excludes agent <span class="r6">0</span>&#x27;s 
+reward by calling function EvaluatePolicyExcluding.
+Operation: call function EvaluatePolicyExcluding with inputs <span class="r5">agent_to_exclude</span>=<span class="r6">0</span>
+Result: The value of the optimal policy on the MDP that excludes agent <span class="r6">0</span>&#x27;s reward is <span class="r6">6.3271329814075665</span>
+Thought: In Step <span class="r6">1</span>, we have computed the value of the policy that maximizes all agents&#x27; rewards except agent <span class="r6">0</span>, which is
+<span class="r6">6.3428</span>, and in Step <span class="r6">2</span> we have computed the value of the policy that maximizes all agents&#x27; rewards including agent <span class="r6">0</span>, 
+which is <span class="r6">6.3271329814075665</span>. The VCG price is simply their difference <span class="r6">6.3428</span> - <span class="r6">6.3271329814075665</span> = <span class="r6">0.0156670185924335</span>.
+agent <span class="r6">0</span>: charged price <span class="r6">0.0156670185924335</span> vcg price <span class="r6">0.0156758062982032</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+Question: Now compute the VCG price for agent <span class="r6">1</span>.
+Thought: Step <span class="r6">1</span>: Compute the policy that maximizes the rewards of all agents excluding agent <span class="r6">1</span> by value iteration, which
+iterates from the last time step <span class="r6">5</span> back to the first time step <span class="r6">0</span>. At the last time step <span class="r6">5</span>, since the episode terminates 
+at this step, the one-step lookahead is zero. Thus the Q values simply equal the immediate reward of each state-action 
+pair. To compute the Q values, we only need to add the immediate rewards of all agents excluding agent <span class="r6">1</span> by calling 
+function UpdateQbyRExcluding. Then the V values can be computed by calling UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">5</span> are updated with the immediate rewards excluding agent <span class="r6">1</span> and stored in the working 
+memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: V values for time step <span class="r6">5</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">4</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">1</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the immediate rewards excluding agent <span class="r6">1</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: V values for time step <span class="r6">4</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">3</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">1</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the immediate rewards excluding agent <span class="r6">1</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: V values for time step <span class="r6">3</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">2</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">1</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the immediate rewards excluding agent <span class="r6">1</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: V values for time step <span class="r6">2</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">1</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">1</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the immediate rewards excluding agent <span class="r6">1</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: V values for time step <span class="r6">1</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">0</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">1</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the immediate rewards excluding agent <span class="r6">1</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: V values for time step <span class="r6">0</span> are updated based on the computed Q values and stored in the working memory.
+Thought: The Q values from the last time step <span class="r6">5</span> to time step <span class="r6">0</span> have now been calculated. We need to know the value of 
+initial state <span class="r6">0</span> at time step <span class="r6">0</span>. Let&#x27;s call GetQExcluding to retrieve all Q values and call GetMax to get the state 
+value.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">state</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: <span class="r7">[</span><span class="r6">4.6134</span> <span class="r6">6.2565</span> <span class="r6">5.9577</span><span class="r7">]</span>
+Operation: call function GetMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">4.6134</span>, <span class="r6">6.2565</span>, <span class="r6">5.9577</span><span class="r7">]</span>
+Result: <span class="r6">6.2565</span>
+Thought: Step <span class="r6">2</span>: We need to evaluate the policy that maximizes all agents&#x27; reward on the MDP that excludes agent <span class="r6">1</span>&#x27;s 
+reward by calling function EvaluatePolicyExcluding.
+Operation: call function EvaluatePolicyExcluding with inputs <span class="r5">agent_to_exclude</span>=<span class="r6">1</span>
+Result: The value of the optimal policy on the MDP that excludes agent <span class="r6">1</span>&#x27;s reward is <span class="r6">5.137531238009858</span>
+Thought: In Step <span class="r6">1</span>, we have computed the value of the policy that maximizes all agents&#x27; rewards except agent <span class="r6">1</span>, which is
+<span class="r6">6.2565</span>, and in Step <span class="r6">2</span> we have computed the value of the policy that maximizes all agents&#x27; rewards including agent <span class="r6">1</span>, 
+which is <span class="r6">5.137531238009858</span>. The VCG price is simply their difference <span class="r6">6.2565</span> - <span class="r6">5.137531238009858</span> = <span class="r6">1.118968761990142</span>.
+agent <span class="r6">1</span>: charged price <span class="r6">1.118968761990142</span> vcg price <span class="r6">1.1190183065765797</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+Question: Now compute the VCG price for agent <span class="r6">2</span>.
+Thought: Step <span class="r6">1</span>: Compute the policy that maximizes the rewards of all agents excluding agent <span class="r6">2</span> by value iteration, which
+iterates from the last time step <span class="r6">5</span> back to the first time step <span class="r6">0</span>. At the last time step <span class="r6">5</span>, since the episode terminates 
+at this step, the one-step lookahead is zero. Thus the Q values simply equal the immediate reward of each state-action 
+pair. To compute the Q values, we only need to add the immediate rewards of all agents excluding agent <span class="r6">2</span> by calling 
+function UpdateQbyRExcluding. Then the V values can be computed by calling UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">5</span> are updated with the immediate rewards excluding agent <span class="r6">2</span> and stored in the working 
+memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: V values for time step <span class="r6">5</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">4</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">2</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the immediate rewards excluding agent <span class="r6">2</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: V values for time step <span class="r6">4</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">3</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">2</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the immediate rewards excluding agent <span class="r6">2</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: V values for time step <span class="r6">3</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">2</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">2</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the immediate rewards excluding agent <span class="r6">2</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: V values for time step <span class="r6">2</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">1</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">2</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the immediate rewards excluding agent <span class="r6">2</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: V values for time step <span class="r6">1</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">0</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">2</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the immediate rewards excluding agent <span class="r6">2</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: V values for time step <span class="r6">0</span> are updated based on the computed Q values and stored in the working memory.
+Thought: The Q values from the last time step <span class="r6">5</span> to time step <span class="r6">0</span> have now been calculated. We need to know the value of 
+initial state <span class="r6">0</span> at time step <span class="r6">0</span>. Let&#x27;s call GetQExcluding to retrieve all Q values and call GetMax to get the state 
+value.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">state</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: <span class="r7">[</span><span class="r6">8.8083</span> <span class="r6">9.2634</span> <span class="r6">8.6166</span><span class="r7">]</span>
+Operation: call function GetMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">8.8083</span>, <span class="r6">9.2634</span>, <span class="r6">8.6166</span><span class="r7">]</span>
+Result: <span class="r6">9.2634</span>
+Thought: Step <span class="r6">2</span>: We need to evaluate the policy that maximizes all agents&#x27; reward on the MDP that excludes agent <span class="r6">2</span>&#x27;s 
+reward by calling function EvaluatePolicyExcluding.
+Operation: call function EvaluatePolicyExcluding with inputs <span class="r5">agent_to_exclude</span>=<span class="r6">2</span>
+Result: The value of the optimal policy on the MDP that excludes agent <span class="r6">2</span>&#x27;s reward is <span class="r6">9.249376201067205</span>
+Thought: In Step <span class="r6">1</span>, we have computed the value of the policy that maximizes all agents&#x27; rewards except agent <span class="r6">2</span>, which is
+<span class="r6">9.2634</span>, and in Step <span class="r6">2</span> we have computed the value of the policy that maximizes all agents&#x27; rewards including agent <span class="r6">2</span>, 
+which is <span class="r6">9.249376201067205</span>. The VCG price is simply their difference <span class="r6">9.2634</span> - <span class="r6">9.249376201067205</span> = <span class="r6">0.014023798932795</span>.
+agent <span class="r6">2</span>: charged price <span class="r6">0.014023798932795</span> vcg price <span class="r6">0.014063814395633756</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+Question: Now compute the VCG price for agent <span class="r6">3</span>.
+Thought: Step <span class="r6">1</span>: Compute the policy that maximizes the rewards of all agents excluding agent <span class="r6">3</span> by value iteration, which
+iterates from the last time step <span class="r6">5</span> back to the first time step <span class="r6">0</span>. At the last time step <span class="r6">5</span>, since the episode terminates 
+at this step, the one-step lookahead is zero. Thus the Q values simply equal the immediate reward of each state-action 
+pair. To compute the Q values, we only need to add the immediate rewards of all agents excluding agent <span class="r6">3</span> by calling 
+function UpdateQbyRExcluding. Then the V values can be computed by calling UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">5</span> are updated with the immediate rewards excluding agent <span class="r6">3</span> and stored in the working 
+memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">5</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: V values for time step <span class="r6">5</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">4</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">3</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the immediate rewards excluding agent <span class="r6">3</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">4</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">4</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: V values for time step <span class="r6">4</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">3</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">3</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the immediate rewards excluding agent <span class="r6">3</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">3</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">3</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: V values for time step <span class="r6">3</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">2</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">3</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the immediate rewards excluding agent <span class="r6">3</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">2</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">2</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: V values for time step <span class="r6">2</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">1</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">3</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the immediate rewards excluding agent <span class="r6">3</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">1</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">1</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: V values for time step <span class="r6">1</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we compute Q values for time step <span class="r6">0</span>. Using the idea of dynamic programming, we compute the Q values in two 
+steps. First, add the immediate rewards of all agents excluding agent <span class="r6">3</span> by calling function UpdateQbyRExcluding. Second,
+add the one-step lookahead by calling function UpdateQbyPVExcluding. Then the V values can be computed by calling 
+UpdateVExcluding.
+Operation: call function UpdateQbyRExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the immediate rewards excluding agent <span class="r6">3</span> and stored in the working 
+memory.
+Operation: call function UpdateQbyPVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: Q values for time step <span class="r6">0</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateVExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: V values for time step <span class="r6">0</span> are updated based on the computed Q values and stored in the working memory.
+Thought: The Q values from the last time step <span class="r6">5</span> to time step <span class="r6">0</span> have now been calculated. We need to know the value of 
+initial state <span class="r6">0</span> at time step <span class="r6">0</span>. Let&#x27;s call GetQExcluding to retrieve all Q values and call GetMax to get the state 
+value.
+Operation: call function GetQExcluding with inputs <span class="r5">time_step</span>=<span class="r6">0</span> <span class="r5">state</span>=<span class="r6">0</span> <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: <span class="r7">[</span><span class="r6">5.6208</span> <span class="r6">6.0933</span> <span class="r6">4.7696</span><span class="r7">]</span>
+Operation: call function GetMax with inputs <span class="r5">number_list</span>=<span class="r7">[</span><span class="r6">5.6208</span>, <span class="r6">6.0933</span>, <span class="r6">4.7696</span><span class="r7">]</span>
+Result: <span class="r6">6.0933</span>
+Thought: Step <span class="r6">2</span>: We need to evaluate the policy that maximizes all agents&#x27; reward on the MDP that excludes agent <span class="r6">3</span>&#x27;s 
+reward by calling function EvaluatePolicyExcluding.
+Operation: call function EvaluatePolicyExcluding with inputs <span class="r5">agent_to_exclude</span>=<span class="r6">3</span>
+Result: The value of the optimal policy on the MDP that excludes agent <span class="r6">3</span>&#x27;s reward is <span class="r6">6.093307286056138</span>
+Thought: In Step <span class="r6">1</span>, we have computed the value of the policy that maximizes all agents&#x27; rewards except agent <span class="r6">3</span>, which is
+<span class="r6">6.0933</span>, and in Step <span class="r6">2</span> we have computed the value of the policy that maximizes all agents&#x27; rewards including agent <span class="r6">3</span>, 
+which is <span class="r6">6.093307286056138</span>. The VCG price is simply their difference <span class="r6">6.0933</span> - <span class="r6">6.093307286056138</span> = 
+<span class="r6">-7.286056137999999e-06</span>.
+agent <span class="r6">3</span>: charged price <span class="r6">-7.286056137999999e-06</span> vcg price <span class="r6">0.0</span>
+<span class="r3">metric: </span><span class="r9">True</span>
+<span class="r3">This episode has ended!</span>
+Performance metric: <span class="r7">[</span><span class="r10">True</span>, <span class="r10">True</span>, <span class="r10">True</span>, <span class="r10">True</span>, <span class="r10">True</span>, <span class="r10">True</span>, <span class="r10">True</span>, <span class="r10">True</span>, <span class="r10">True</span>, <span class="r10">True</span><span class="r7">]</span>
+</code></pre>
+</body>
+</html>
