@@ -1,6 +1,6 @@
 # STRIDE: A Tool-Assisted LLM Agent Framework for Strategic and Interactive Decision-Making
 
-This repository contains implementation of STRIDE, a framework designed to enhance the **STR**ategic and **I**nteractive **DE**cision making capability of LLMs. 
+This repository contains implementation of [STRIDE: A Tool-Assisted LLM Agent Framework for Strategic and Interactive Decision-Making](https://arxiv.org/abs/2405.16376).
 
 This is achieved by equipping LLMs with a set of operational tools specially designed to take care of low-level calculations of the decision-making problem of interest and then instructing the LLM to generate a structured Thought sequence that utilizes these operational tools to emulate various algorithmic behaviors to optimally solve the problem. 
 For example, the figure below illustrates how STRIDE emulates the Value Iteration Algorithm to compute the optimal policy of an MDP.
