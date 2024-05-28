@@ -38,3 +38,13 @@ Follow the following procedure
 - run the implemented algorithm on the defined environment using `generate_examples.py`, which saves the demonstration as a `txt` file.
 
 Then by providing STRIDE with the generated demonstration file and the operational tools, it will be able to emulate the reference algorithm in its reasoning process.
+
+### Citation
+```
+@article{li2024stride,
+      title={STRIDE: A Tool-Assisted LLM Agent Framework for Strategic and Interactive Decision-Making},
+      author={Chuanhao Li, Runhan Yang, Tiankai Li, Milad Bafarassat, Kourosh Sharifi, Dirk Bergemann, Zhuoran Yang},
+      journal={arXiv preprint arXiv:2405.16376},
+      year={2024}
+}
+```
