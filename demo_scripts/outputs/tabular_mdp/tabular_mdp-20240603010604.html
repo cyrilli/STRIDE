@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+.r1 {color: #800080; text-decoration-color: #800080}
+.r2 {color: #ff00ff; text-decoration-color: #ff00ff}
+.r3 {color: #800000; text-decoration-color: #800000}
+.r4 {color: #800000; text-decoration-color: #800000; font-weight: bold}
+.r5 {color: #008080; text-decoration-color: #008080; font-weight: bold}
+.r6 {font-weight: bold}
+.r7 {color: #808000; text-decoration-color: #808000}
+.r8 {color: #800000; text-decoration-color: #800000; font-style: italic}
+body {
+    color: #000000;
+    background-color: #ffffff;
+}
+</style>
+</head>
+<body>
+    <pre style="font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><code style="font-family:inherit">All outputs written to .<span class="r1">/outputs/tabular_mdp/</span><span class="r2">tabular_mdp-20240603010604.html</span>
+<span class="r3">Start to play tabular_mdp with parameter </span><span class="r4">{</span><span class="r3">&#x27;nState&#x27;</span><span class="r3">: </span><span class="r4">120</span><span class="r3">, </span><span class="r3">&#x27;nAction&#x27;</span><span class="r3">: </span><span class="r4">5</span><span class="r3">, </span><span class="r3">&#x27;epLen&#x27;</span><span class="r3">: </span><span class="r4">10</span><span class="r3">, </span><span class="r3">&#x27;R&#x27;</span><span class="r3">: </span><span class="r4">array([[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       ...,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">7</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]])</span><span class="r3">, </span><span class="r3">&#x27;P&#x27;</span><span class="r3">: </span><span class="r4">array([[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       ...,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]]</span><span class="r3">,</span>
+
+<span class="r3">       </span><span class="r4">[[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]</span><span class="r3">,</span>
+<span class="r3">        </span><span class="r4">[</span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., ..., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">0</span><span class="r3">., </span><span class="r4">1</span><span class="r3">.</span><span class="r4">]]]</span><span class="r3">, </span><span class="r3">dtype</span><span class="r3">=</span><span class="r3">float32</span><span class="r4">)}</span>
+To agent:
+Now you are going to play in a finite-horizon tabular Markov decision process, with length of horizon <span class="r5">10</span> <span class="r6">(</span>with time
+indices starting from <span class="r7">h</span>=<span class="r5">0</span> to <span class="r5">9</span><span class="r6">)</span>, number of states |S|=<span class="r5">120</span>, number of actions |A|=<span class="r5">5</span>. The transition matrix P is:
+stored in working memory. Full matrix is too large to be printed in context history.
+and reward matrix R is
+stored in working memory. Full matrix is too large to be printed in context history.
+
+Question: Now compute the optimal policy, that is, the optimal action at each step and each state.
+Thought: To compute the optimal policy, we will use value iteration, iterating from the last time step <span class="r5">9</span> back to 
+the first time step <span class="r5">0</span>. At the last time step <span class="r5">9</span>, the Q values simply equal the immediate reward of each state-action
+pair. We will start by updating the Q values for time step <span class="r5">9</span> with the immediate rewards and then compute the V 
+values by taking the maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">9</span>
+Result: Q values for time step <span class="r5">9</span> are updated with the immediate rewards and stored in the working memory.
+Thought: Now we need to compute the V values for time step <span class="r5">9</span> by taking the maximum of the Q values over actions.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">9</span>
+Result: V values for time step <span class="r5">9</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">8</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">8</span>
+Result: Q values for time step <span class="r5">8</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">8</span>
+Result: Q values for time step <span class="r5">8</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">8</span>
+Result: V values for time step <span class="r5">8</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">7</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">7</span>
+Result: Q values for time step <span class="r5">7</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">7</span>
+Result: Q values for time step <span class="r5">7</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">7</span>
+Result: V values for time step <span class="r5">7</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">6</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">6</span>
+Result: Q values for time step <span class="r5">6</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">6</span>
+Result: Q values for time step <span class="r5">6</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">6</span>
+Result: V values for time step <span class="r5">6</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">5</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">5</span>
+Result: Q values for time step <span class="r5">5</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">5</span>
+Result: Q values for time step <span class="r5">5</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">5</span>
+Result: V values for time step <span class="r5">5</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">4</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">4</span>
+Result: Q values for time step <span class="r5">4</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">4</span>
+Result: Q values for time step <span class="r5">4</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">4</span>
+Result: V values for time step <span class="r5">4</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">3</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">3</span>
+Result: Q values for time step <span class="r5">3</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">3</span>
+Result: Q values for time step <span class="r5">3</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">3</span>
+Result: V values for time step <span class="r5">3</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">2</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">2</span>
+Result: Q values for time step <span class="r5">2</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">2</span>
+Result: Q values for time step <span class="r5">2</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">2</span>
+Result: V values for time step <span class="r5">2</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">1</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">1</span>
+Result: Q values for time step <span class="r5">1</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">1</span>
+Result: Q values for time step <span class="r5">1</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">1</span>
+Result: V values for time step <span class="r5">1</span> are updated based on the computed Q values and stored in the working memory.
+Thought: Now we need to compute the Q values for time step <span class="r5">0</span>. Using the idea of dynamic programming, we compute the
+Q values in two steps. First, add the immediate rewards by calling function UpdateQbyR. Second, add the one-step 
+lookahead by calling function UpdateQbyPV. Then the V values can be computed by calling UpdateV, which takes the 
+maximum of the Q values over actions.
+Operation: call function UpdateQbyR with inputs <span class="r7">time_step</span>=<span class="r5">0</span>
+Result: Q values for time step <span class="r5">0</span> are updated with the immediate rewards and stored in the working memory.
+Operation: call function UpdateQbyPV with inputs <span class="r7">time_step</span>=<span class="r5">0</span>
+Result: Q values for time step <span class="r5">0</span> are updated with the one-step look ahead and stored in the working memory.
+Operation: call function UpdateV with inputs <span class="r7">time_step</span>=<span class="r5">0</span>
+Result: V values for time step <span class="r5">0</span> are updated based on the computed Q values and stored in the working memory.
+Thought: The Q values from the last time step <span class="r5">9</span> to time step <span class="r5">0</span> have now been calculated. We should exit the 
+reasoning process.
+<span class="r3">This is time step </span><span class="r4">0</span><span class="r3">, the current state is </span><span class="r4">70</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">0</span>, the current state is <span class="r5">70</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">70</span>, and time step, which is <span class="r5">0</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">0</span> <span class="r7">state</span>=<span class="r5">70</span>
+Result: <span class="r6">[</span><span class="r5">53.3333</span> <span class="r5">55</span>.     <span class="r5">55</span>.     <span class="r5">64</span>.     <span class="r5">51</span>.    <span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">53.3333</span>, <span class="r5">55</span>, <span class="r5">55</span>, <span class="r5">64</span>, <span class="r5">51</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">53.3333</span>, <span class="r5">55.0</span>, <span class="r5">55.0</span>, <span class="r5">64.0</span>, <span class="r5">51.0</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">3</span><span class="r6">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r5">3</span>, as it maximizes the Q value <span class="r6">(</span>break the tie 
+randomly if there are multiple maximums<span class="r6">)</span>.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">53.33333333</span> <span class="r5">55</span>.         <span class="r5">55</span>.         <span class="r5">64</span>.         <span class="r5">51</span>.        <span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">3</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">1</span><span class="r3">, the current state is </span><span class="r4">111</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">1</span>, the current state is <span class="r5">111</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">111</span>, and time step, which is <span class="r5">1</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">1</span> <span class="r7">state</span>=<span class="r5">111</span>
+Result: <span class="r6">[</span><span class="r5">58</span>.      <span class="r5">9.6667</span>  <span class="r5">9.6667</span>  <span class="r5">9.6667</span>  <span class="r5">9.6667</span><span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">58</span>, <span class="r5">9.6667</span>, <span class="r5">9.6667</span>, <span class="r5">9.6667</span>, <span class="r5">9.6667</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">58.0</span>, <span class="r5">9.6667</span>, <span class="r5">9.6667</span>, <span class="r5">9.6667</span>, <span class="r5">9.6667</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">0</span><span class="r6">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r5">0</span>, as it maximizes the Q value <span class="r6">(</span>break the tie 
+randomly if there are multiple maximums<span class="r6">)</span>.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">58</span>.          <span class="r5">9.66666667</span>  <span class="r5">9.66666667</span>  <span class="r5">9.66666667</span>  <span class="r5">9.66666667</span><span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">0</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">2</span><span class="r3">, the current state is </span><span class="r4">102</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">2</span>, the current state is <span class="r5">102</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">102</span>, and time step, which is <span class="r5">2</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">2</span> <span class="r7">state</span>=<span class="r5">102</span>
+Result: <span class="r6">[</span>  <span class="r5">49.3333</span>   <span class="r5">51</span>.     <span class="r5">-645.6667</span>   <span class="r5">51</span>.       <span class="r5">51</span>.    <span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">49.3333</span>, <span class="r5">51</span>, <span class="r5">-645.6667</span>, <span class="r5">51</span>, <span class="r5">51</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">49.3333</span>, <span class="r5">51.0</span>, <span class="r5">-645.6667</span>, <span class="r5">51.0</span>, <span class="r5">51.0</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span> <span class="r5">3</span> <span class="r5">4</span><span class="r6">]</span>
+Thought: There are multiple actions <span class="r6">(</span><span class="r5">1</span>, <span class="r5">3</span>, and <span class="r5">4</span><span class="r6">)</span> that maximize the Q value. I will randomly choose one of these 
+actions.
+q_optimal for current step and state <span class="r6">[</span>  <span class="r5">49.33333333</span>   <span class="r5">51</span>.         <span class="r5">-645.66666667</span>   <span class="r5">51</span>.           <span class="r5">51</span>.        <span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">3</span><span class="r3">, the current state is </span><span class="r4">103</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">3</span>, the current state is <span class="r5">103</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">103</span>, and time step, which is <span class="r5">3</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">3</span> <span class="r7">state</span>=<span class="r5">103</span>
+Result: <span class="r6">[</span>  <span class="r5">42.3333</span>   <span class="r5">45.6667</span> <span class="r5">-552.6667</span>   <span class="r5">45.6667</span>   <span class="r5">45.6667</span><span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">42.3333</span>, <span class="r5">45.6667</span>, <span class="r5">-552.6667</span>, <span class="r5">45.6667</span>, <span class="r5">45.6667</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">42.3333</span>, <span class="r5">45.6667</span>, <span class="r5">-552.6667</span>, <span class="r5">45.6667</span>, <span class="r5">45.6667</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span> <span class="r5">3</span> <span class="r5">4</span><span class="r6">]</span>
+Thought: There are multiple actions <span class="r6">(</span><span class="r5">1</span>, <span class="r5">3</span>, and <span class="r5">4</span><span class="r6">)</span> that maximize the Q value. I will randomly choose one of these 
+actions.
+q_optimal for current step and state <span class="r6">[</span>  <span class="r5">42.33333333</span>   <span class="r5">45.66666667</span> <span class="r5">-552.66666667</span>   <span class="r5">45.66666667</span>   <span class="r5">45.66666667</span><span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">4</span><span class="r3">, the current state is </span><span class="r4">104</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">4</span>, the current state is <span class="r5">104</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">104</span>, and time step, which is <span class="r5">4</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">4</span> <span class="r7">state</span>=<span class="r5">104</span>
+Result: <span class="r6">[</span><span class="r5">35.3333</span> <span class="r5">38.6667</span> <span class="r5">40.3333</span> <span class="r5">38.6667</span> <span class="r5">38.6667</span><span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">35.3333</span>, <span class="r5">38.6667</span>, <span class="r5">40.3333</span>, <span class="r5">38.6667</span>, <span class="r5">38.6667</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">35.3333</span>, <span class="r5">38.6667</span>, <span class="r5">40.3333</span>, <span class="r5">38.6667</span>, <span class="r5">38.6667</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">2</span><span class="r6">]</span>
+Thought: Now I can exit the reasoning process, and choose action <span class="r5">2</span>, as it maximizes the Q value <span class="r6">(</span>break the tie 
+randomly if there are multiple maximums<span class="r6">)</span>.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">35.33333333</span> <span class="r5">38.66666667</span> <span class="r5">40.33333333</span> <span class="r5">38.66666667</span> <span class="r5">38.66666667</span><span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">2</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">5</span><span class="r3">, the current state is </span><span class="r4">115</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">5</span>, the current state is <span class="r5">115</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">115</span>, and time step, which is <span class="r5">5</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">5</span> <span class="r7">state</span>=<span class="r5">115</span>
+Result: <span class="r6">[</span><span class="r5">33.3333</span> <span class="r5">35</span>.     <span class="r5">35</span>.     <span class="r5">35</span>.     <span class="r5">35</span>.    <span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">33.3333</span>, <span class="r5">35</span>, <span class="r5">35</span>, <span class="r5">35</span>, <span class="r5">35</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">33.3333</span>, <span class="r5">35.0</span>, <span class="r5">35.0</span>, <span class="r5">35.0</span>, <span class="r5">35.0</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span> <span class="r5">2</span> <span class="r5">3</span> <span class="r5">4</span><span class="r6">]</span>
+Thought: There are multiple actions <span class="r6">(</span><span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, and <span class="r5">4</span><span class="r6">)</span> that maximize the Q value. I will randomly choose one of these
+actions.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">33.33333333</span> <span class="r5">35</span>.         <span class="r5">35</span>.         <span class="r5">35</span>.         <span class="r5">35</span>.        <span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">1</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">6</span><span class="r3">, the current state is </span><span class="r4">116</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">6</span>, the current state is <span class="r5">116</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">116</span>, and time step, which is <span class="r5">6</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">6</span> <span class="r7">state</span>=<span class="r5">116</span>
+Result: <span class="r6">[</span><span class="r5">26.3333</span> <span class="r5">28</span>.     <span class="r5">28</span>.     <span class="r5">28</span>.     <span class="r5">28</span>.    <span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">26.3333</span>, <span class="r5">28</span>, <span class="r5">28</span>, <span class="r5">28</span>, <span class="r5">28</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">26.3333</span>, <span class="r5">28.0</span>, <span class="r5">28.0</span>, <span class="r5">28.0</span>, <span class="r5">28.0</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span> <span class="r5">2</span> <span class="r5">3</span> <span class="r5">4</span><span class="r6">]</span>
+Thought: There are multiple actions <span class="r6">(</span><span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, and <span class="r5">4</span><span class="r6">)</span> that maximize the Q value. I will randomly choose one of these
+actions.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">26.33333333</span> <span class="r5">28</span>.         <span class="r5">28</span>.         <span class="r5">28</span>.         <span class="r5">28</span>.        <span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">2</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">7</span><span class="r3">, the current state is </span><span class="r4">117</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">7</span>, the current state is <span class="r5">117</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">117</span>, and time step, which is <span class="r5">7</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">7</span> <span class="r7">state</span>=<span class="r5">117</span>
+Result: <span class="r6">[</span><span class="r5">19.3333</span> <span class="r5">21</span>.     <span class="r5">21</span>.     <span class="r5">21</span>.     <span class="r5">21</span>.    <span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">19.3333</span>, <span class="r5">21</span>, <span class="r5">21</span>, <span class="r5">21</span>, <span class="r5">21</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">19.3333</span>, <span class="r5">21.0</span>, <span class="r5">21.0</span>, <span class="r5">21.0</span>, <span class="r5">21.0</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span> <span class="r5">2</span> <span class="r5">3</span> <span class="r5">4</span><span class="r6">]</span>
+Thought: There are multiple actions <span class="r6">(</span><span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, and <span class="r5">4</span><span class="r6">)</span> that maximize the Q value. I will randomly choose one of these
+actions.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">19.33333333</span> <span class="r5">21</span>.         <span class="r5">21</span>.         <span class="r5">21</span>.         <span class="r5">21</span>.        <span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">2</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">8</span><span class="r3">, the current state is </span><span class="r4">118</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">8</span>, the current state is <span class="r5">118</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">118</span>, and time step, which is <span class="r5">8</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">8</span> <span class="r7">state</span>=<span class="r5">118</span>
+Result: <span class="r6">[</span><span class="r5">12.3333</span> <span class="r5">14</span>.     <span class="r5">14</span>.     <span class="r5">14</span>.     <span class="r5">14</span>.    <span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">12.3333</span>, <span class="r5">14</span>, <span class="r5">14</span>, <span class="r5">14</span>, <span class="r5">14</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">12.3333</span>, <span class="r5">14.0</span>, <span class="r5">14.0</span>, <span class="r5">14.0</span>, <span class="r5">14.0</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">1</span> <span class="r5">2</span> <span class="r5">3</span> <span class="r5">4</span><span class="r6">]</span>
+Thought: There are multiple actions <span class="r6">(</span><span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, and <span class="r5">4</span><span class="r6">)</span> that maximize the Q value. I will randomly choose one of these
+actions.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">12.33333333</span> <span class="r5">14</span>.         <span class="r5">14</span>.         <span class="r5">14</span>.         <span class="r5">14</span>.        <span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">2</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This is time step </span><span class="r4">9</span><span class="r3">, the current state is </span><span class="r4">119</span><span class="r3">, and the available actions are </span><span class="r4">[</span><span class="r4">0</span><span class="r3">, </span><span class="r4">1</span><span class="r3">, </span><span class="r4">2</span><span class="r3">, </span><span class="r4">3</span><span class="r3">, </span><span class="r4">4</span><span class="r4">]</span><span class="r3">.</span>
+<span class="r3">Question: Now which action the agent should take?</span>
+Question: This is time step <span class="r5">9</span>, the current state is <span class="r5">119</span>, and the available actions are <span class="r6">[</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, <span class="r5">4</span><span class="r6">]</span>.
+Question: Now which action the agent should take?
+Thought: I should retrieve the Q values for the current state, which is <span class="r5">119</span>, and time step, which is <span class="r5">9</span>.
+Operation: call function GetQ with inputs <span class="r7">time_step</span>=<span class="r5">9</span> <span class="r7">state</span>=<span class="r5">119</span>
+Result: <span class="r6">[</span><span class="r5">7</span>. <span class="r5">7</span>. <span class="r5">7</span>. <span class="r5">7</span>. <span class="r5">7</span>.<span class="r6">]</span>
+Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list 
+<span class="r6">[</span><span class="r5">7</span>, <span class="r5">7</span>, <span class="r5">7</span>, <span class="r5">7</span>, <span class="r5">7</span><span class="r6">]</span>.
+Operation: call function GetArgMax with inputs <span class="r7">number_list</span>=<span class="r6">[</span><span class="r5">7.0</span>, <span class="r5">7.0</span>, <span class="r5">7.0</span>, <span class="r5">7.0</span>, <span class="r5">7.0</span><span class="r6">]</span>
+Result: <span class="r6">[</span><span class="r5">0</span> <span class="r5">1</span> <span class="r5">2</span> <span class="r5">3</span> <span class="r5">4</span><span class="r6">]</span>
+Thought: There are multiple actions <span class="r6">(</span><span class="r5">0</span>, <span class="r5">1</span>, <span class="r5">2</span>, <span class="r5">3</span>, and <span class="r5">4</span><span class="r6">)</span> that maximize the Q value. I will randomly choose one of 
+these actions.
+q_optimal for current step and state <span class="r6">[</span><span class="r5">7</span>. <span class="r5">7</span>. <span class="r5">7</span>. <span class="r5">7</span>. <span class="r5">7</span>.<span class="r6">]</span>
+<span class="r3">agent: </span><span class="r4">2</span>
+<span class="r3">metric: </span><span class="r8">True</span>
+<span class="r3">This episode has ended!</span>
+</code></pre>
+</body>
+</html>
