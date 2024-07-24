@@ -111,23 +111,18 @@ if __name__ == "__main__":
     ### initialize game and agents ###
     env_param = get_env_param(env_name="bargain_alternate_multipleissue", random_param=args.random_param)
     # env_param = {
-    #     "T": 4,
-    #     "buyerDiscount": [0.83,0.78,0.48 ,0.01],
-    #     "sellerDiscount": [0.87,0.05,0.16, 0.86],
-    #     "buyerWeight": [0.45,0.03,0.87,0.39],
-    #     "sellerWeight": [0.14,0.17,0.07,0.89]
-    # }
+    #         "T": 2,
+    #         "buyerDiscount": [0.38, 0.89, 0.48, 0.53, 0.58, 0.95],
+    #         "sellerDiscount": [0.07, 0.82, 0.06, 0.92, 0.76, 0.72],
+    #         "buyerWeight": [0.23, 0.27, 0.23, 0.32, 0.25, 0.85],
+    #         "sellerWeight": [0.37, 0.4 , 0.68, 0.77, 0.93, 0.12]
+    #     }
     
-    # env_param = {
-    #     "T": 3,
-    #     "buyerDiscount": [0.05, 0.42],
-    #     "sellerDiscount": [0.77, 0.68],
-    #     "buyerWeight": [0.13, 0.7],
-    #     "sellerWeight": [0.54, 0.55]
-    # }
     game = BargainAlternateMultiIssue(env_param=env_param)
     buyer_exmps_file = "prompts/buyer_exmps.txt"
+    buyer_exmps_file = os.path.join(current_folder_path, buyer_exmps_file)
     seller_exmps_file = "prompts/seller_exmps.txt"
+    seller_exmps_file = os.path.join(current_folder_path, seller_exmps_file)
     working_memory = {
         "T": game.T, 
         "buyerDiscounts": game.buyerDiscount, 

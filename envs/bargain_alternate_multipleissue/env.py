@@ -77,6 +77,7 @@ class BargainAlternateMultiIssue():
         if any(isinstance(a, str) for a in action):
             pass
         else:
+            action = np.array(action)
             action = action.astype(float)
         if all(isinstance(a, float) for a in action):
             action = [float(a) for a in action]

@@ -1,31 +1,26 @@
 from pydantic import BaseModel, Field, field_validator
+from typing import List
 import numpy as np
 from copy import deepcopy
 
-tool_names = ["CalcUtil", "BackwardOneStep", "GetSPEPrice"]
+tool_names_bargain_complete_info_multi = ["CalcUtil", "BackwardOneStep", "GetSPEPrice"]
 
 class CalcUtil(BaseModel):
     """
-    Calculate utility for all buyers or all sellers
+    Calculate utility for buyer or all sellers.
     """
-    agent_type: str = Field(
+    agent: str = Field(
         ...,
         description="""The type of agent: 'buyer' or 'seller'""",
     )
-    price: list = Field(
+    prices: List[float] = Field(
         ...,
-        description="""The price""",
+        description="""The prices""",
     )
     time_step: int = Field(
         ...,
         description="""The time step""",
     )
-
-# class CalcUtil():
-#     def __init__(self, agent_type, price, time_step):
-#         self.agent_type = agent_type
-#         self.price = price
-#         self.time_step = time_step
 
     def execute(self, working_memory):
         required_params = ["buyerDiscounts", "sellerDiscounts", "buyerWeights", "sellerWeights"]
@@ -33,134 +28,61 @@ class CalcUtil(BaseModel):
         if missing_params:
             return "Parameters {} missing in the working memory.".format(missing_params)
 
-        if self.agent_type == "buyer":
+        if self.agent == "buyer":
             values = np.ones(len(working_memory["buyerDiscounts"]))
             discounts = np.array(working_memory["buyerDiscounts"])
             weights = np.array(working_memory["buyerWeights"])
-        elif self.agent_type == "seller":
+        elif self.agent == "seller":
             values = np.zeros(len(working_memory["sellerDiscounts"]))
             discounts = np.array(working_memory["sellerDiscounts"])
             weights = np.array(working_memory["sellerWeights"])
+        else:
+            return "Invalid agent type."
 
         values_arr = np.array(values)
-        self_price_arr = np.array(self.price)
+        self_price_arr = np.array(self.prices)
         discounts_arr = np.array(discounts)
         weights_arr = np.array(weights)
 
-        utils = np.abs(values_arr - self_price_arr) * np.power(discounts_arr, self.time_step - 1) * weights_arr
+        # Ensure all arrays are the same length
+        min_length = min(len(values_arr), len(self_price_arr), len(discounts_arr), len(weights_arr))
+        values_arr = values_arr[:min_length]
+        self_price_arr = self_price_arr[:min_length]
+        discounts_arr = discounts_arr[:min_length]
+        weights_arr = weights_arr[:min_length]
 
-        result = "The utilities that all {}s get for agreeing on price {} at time step {} are: {}".format(
-            self.agent_type, self.price, self.time_step, np.round(utils, 4).tolist()
+        # Calculate utilities
+        utils = np.abs(values_arr - self_price_arr) * np.power(discounts_arr, self.time_step - 1) * weights_arr
+        total_util = np.round(np.sum(utils), 2)
+
+        result = "The total utility that {} gets for agreeing on prices {} at time step {} is: {}".format(
+            self.agent, self.prices, self.time_step, total_util
         )
         return result
 
+
 class BackwardOneStep(BaseModel):
     """
-    Compute SPE price using one step of backward induction reasoning for all agents
+    compute SPE price using one step of backward induction reasoning based on opponent's utility if rejecting
     """
-    agent_type: str = Field(
+    agent: str = Field(
         ...,
-        description="""The current agent type: 'buyer' or 'seller'""",
+        description="""the current agent""",
     )
-    opponent_util_if_rej: list = Field(
+    opponent_util_if_rej: float = Field(
         ...,
-        description="""The utilities that the opponents can get if the game continues to the next time step""",
+        description="""the utility that the opponent can get if the game continues to the next time step""",
     )
     time_step: int = Field(
         ...,
-        description="""The current time step""",
+        description="""the current time step""",
     )
 
-# class BackwardOneStep():
-#     def __init__(self, agent_type, opponent_util_if_rej, time_step):
-#         self.agent_type = agent_type
-#         self.opponent_util_if_rej = opponent_util_if_rej
-#         self.time_step = time_step
-
-    def execute(self, working_memory):
-        required_params = ["buyerDiscounts", "sellerDiscounts", "buyerWeights", "sellerWeights", "SPEPrices", "T"]
-        missing_params = [param for param in required_params if param not in working_memory]
-        if missing_params:
-            return "Parameters {} missing in the working memory.".format(missing_params)
-        buyer_discounts = working_memory["buyerDiscounts"]
-        seller_discounts = working_memory["sellerDiscounts"]
-        buyer_weights = working_memory["buyerWeights"]
-        seller_weights = working_memory["sellerWeights"]
-        T = working_memory["T"]
-
-        buyer_share, buyer_utility, seller_share, seller_utility = self.calculate_spe_price_utility(self.time_step, self.opponent_util_if_rej, self.agent_type, buyer_discounts, seller_discounts, buyer_weights, seller_weights, T)
-
-        if self.agent_type == "buyer":
-            util = buyer_utility
-            share = buyer_share
-        else:
-            util = seller_utility
-            share = seller_share
-        print(f"current agent: {self.agent_type}, buyer_share: {buyer_share}, buyer_utility: {buyer_utility}, seller_share: {seller_share}, seller_utility: {seller_utility}")
-        if "SPEPrices" not in working_memory:
-            working_memory["SPEPrice"] = {}
-        
-        working_memory["SPEPrices"][self.time_step] = share
-        result = "The SPE prices of {} at time step {} are {} with utility {}".format(
-            self.agent_type, self.time_step, np.round(share, 2).tolist(), util
-        )
-        return result, np.round(share, 2).tolist(), util
-    
-    def calculate_spe_price_utility(self, cur_time, oppo_util_if_rej, cur_player, buyer_discounts, seller_discounts, buyer_weights, seller_weights, T):
-        assert len(buyer_weights) == len(buyer_discounts)
-        assert len(seller_weights) == len(seller_discounts)
-        assert len(buyer_weights) == len(seller_weights)
-        assert type(cur_time) == int
-
-        d = len(buyer_weights)
-        for t in range(1, cur_time + 1):
-            t = T - t + 1
-            # print(f"Time Step: {t}")
-            if cur_player == "buyer":
-                next_player = "seller"
-            else:
-                next_player = "buyer"
-
-            # The first round
-            if t == T:
-                oppo_util_if_rej = 0
-                if next_player == "buyer":
-                    buyer_next_share = [0 for _ in range(d)]
-                    seller_next_share = [1 for _ in range(d)]
-                else:
-                    buyer_next_share = [1 for _ in range(d)]
-                    seller_next_share = [0 for _ in range(d)]
-                buyer_next_util, _ = self.calculate_utility(t, buyer_discounts, buyer_weights, buyer_next_share)
-                seller_next_util, _ = self.calculate_utility(t, seller_discounts, seller_weights, seller_next_share)
-
-                oppo_util_if_rej = buyer_next_util if (buyer_next_util > 0) else seller_next_util
-                
-            else:
-                if cur_player == "buyer":
-                    buyer_next_share, buyer_next_util, seller_next_share, seller_next_util = self.solve_for_share(cur_player, t, oppo_util_if_rej, buyer_weights, seller_weights, buyer_discounts, seller_discounts)
-                    oppo_util_if_rej = buyer_next_util
-
-                else:
-                    buyer_next_share, buyer_next_util, seller_next_share, seller_next_util = self.solve_for_share(cur_player, t, oppo_util_if_rej, buyer_weights, seller_weights, buyer_discounts, seller_discounts)
-                    oppo_util_if_rej = seller_next_util
-                    
-            # print(f"next player:{next_player}, buyer_next_share: {buyer_next_share}, buyer_next_util: {buyer_next_util}, seller_next_share: {seller_next_share}, seller_next_util: {seller_next_util}, oppo_util_if_rej: {oppo_util_if_rej}")
-            print(f"current player:{cur_player}, buyer_next_util: {buyer_next_util}, seller_next_util: {seller_next_util}, oppo_util_if_rej: {oppo_util_if_rej}")
-            cur_player = next_player
-
-        # if cur_player == "buyer":
-        #     buyer_share, buyer_utility, seller_share, seller_utility = self.solve_for_share("buyer", cur_time, oppo_util_if_rej, buyer_weights, seller_weights, buyer_discounts, seller_discounts)
-        # else:
-        #     buyer_share, buyer_utility, seller_share, seller_utility = self.solve_for_share("seller", cur_time, oppo_util_if_rej, buyer_weights, seller_weights, buyer_discounts, seller_discounts)
-
-        #    print(f"buyer_share: {buyer_next_share}, buyer_util: {buyer_next_util}, seller_share: {seller_next_share}, seller_util: {seller_next_util}")
-        return buyer_next_share, buyer_next_util, seller_next_share, seller_next_util
-    
     def solve_for_share(self, cur_player, cur_time, oppo_util_if_rej, buyer_weight, seller_weight, buyer_discount, seller_discount):
         assert len(buyer_weight) == len(buyer_discount)
         assert len(seller_weight) == len(seller_discount)
         assert len(buyer_weight) == len(seller_weight)
-        assert type(cur_time) == int
+        assert isinstance(cur_time, int)
 
         d = len(buyer_weight)
         oppo_util_if_rej_temp = deepcopy(oppo_util_if_rej)
@@ -177,12 +99,7 @@ class BackwardOneStep(BaseModel):
                     share_to_opponent[i] = oppo_util_if_rej_temp / (seller_weight[i] * seller_discount[i]**(cur_time-1))
                     oppo_util_if_rej_temp = 0
 
-            seller_util, _ = self.calculate_utility(cur_time, seller_discount, seller_weight, share_to_opponent)
-            buyer_util, _ = self.calculate_utility(cur_time, buyer_discount, buyer_weight, 1.0 - share_to_opponent)
-            # assert abs(seller_util - oppo_util_if_rej) <= 1e-3
             buyer_share = 1.0 - share_to_opponent
-            seller_share = share_to_opponent
-
         else:
             share_to_opponent = np.zeros(d).astype(np.float32)
             ratio = np.divide(buyer_weight, seller_weight)
@@ -195,54 +112,70 @@ class BackwardOneStep(BaseModel):
                     share_to_opponent[i] = oppo_util_if_rej_temp / (buyer_weight[i] * buyer_discount[i]**(cur_time-1))
                     oppo_util_if_rej_temp = 0
 
-            seller_util, _ = self.calculate_utility(cur_time, seller_discount, seller_weight, 1.0 - share_to_opponent)
-            buyer_util, _ = self.calculate_utility(cur_time, buyer_discount, buyer_weight, share_to_opponent)
-            # assert abs(buyer_util - oppo_util_if_rej) <= 1e-3
             buyer_share = share_to_opponent
-            seller_share = 1.0 - share_to_opponent
-        return np.round(buyer_share, 2), buyer_util, np.round(seller_share, 2), seller_util
-    
-    def calculate_utility(sefl, cur_time, discounts, weights, shares):
-        utility = sum(weights[i] * shares[i] * discounts[i]**(cur_time - 1) for i in range(len(weights)))
-        utility = round(utility, 2)
-        return utility, shares
+
+        seller_share = 1.0 - buyer_share
+        return np.round(buyer_share, 2), np.round(seller_share, 2)
+
+    def execute(self, working_memory):
+        required_params = ["buyerDiscounts", "sellerDiscounts", "buyerWeights", "sellerWeights"]
+        missing_params = []
+        for required_param in required_params:
+            if required_param not in working_memory:
+                missing_params.append(required_param)
+        if missing_params:
+            return f"Parameters {missing_params} missing in the working memory."
+
+        buyer_discount = working_memory["buyerDiscounts"]
+        seller_discount = working_memory["sellerDiscounts"]
+        buyer_weight = working_memory["buyerWeights"]
+        seller_weight = working_memory["sellerWeights"]
+
+        buyer_share, seller_share = self.solve_for_share(
+            self.agent, self.time_step, self.opponent_util_if_rej,
+            buyer_weight, seller_weight, buyer_discount, seller_discount
+        )
+
+        if self.agent == "buyer":
+            price = 1.0 - buyer_share
+        else:
+            price = seller_share
+
+        working_memory["SPEPrice"][self.time_step] = price
+        return f"The SPE price of {self.agent} at time step {self.time_step} is {np.round(price, 4)}"
+
 
 class GetSPEPrice(BaseModel):
     """
-    When making an offer, use this operation to retrieve the SPE prices computed before
+    when making an offer, use this operation to retrieve the SPE price computed before
     """
-    agent_type: str = Field(
+    agent: str = Field(
         ...,
-        description="""The agent type: 'buyer' or 'seller'""",
+        description="""the agent""",
     )
     time_step: int = Field(
         ...,
-        description="""The time step""",
+        description="""the time step""",
     )
 
-# class GetSPEPrice():
-    
-#     def __init__(self, agent_type,  time_step):
-#         self.agent_type = agent_type
-#         self.time_step = time_step
-
     def execute(self, working_memory):
-        required_params = ["SPEPrices"]
-        missing_params = [param for param in required_params if param not in working_memory]
+        required_params = ["SPEPrice"]
+        missing_params = []
+        for required_param in required_params:
+            if required_param not in working_memory:
+                missing_params.append(required_param)
         if missing_params:
-            return "Parameters {} missing in the working memory.".format(missing_params)
-        time = working_memory["T"] + 1 - self.time_step
-        if time in working_memory["SPEPrices"]:
-            spe_prices = working_memory["SPEPrices"][time]
+            return f"Parameters {missing_params} missing in the working memory."
+        if self.time_step in working_memory["SPEPrice"]:
+            spe_price = working_memory["SPEPrice"][self.time_step]        
             if self.time_step % 2 == 0:
-                if self.agent_type != "seller":
-                    return "Buyer is not the agent that offers a price at time step {}".format(self.time_step)
+                # even, seller's turn
+                if self.agent != "seller":
+                    return f"buyer is not the agent that offers a price at time step {self.time_step}"
             else:
-                if self.agent_type != "buyer":
-                    return "Seller is not the agent that offers a price at time step {}".format(self.time_step)
+                if self.agent != "buyer":
+                    return f"seller is not the agent that offers a price at time step {self.time_step}"
 
-            return "The SPE prices of all {}s at time step {} are: {}".format(
-                self.agent_type, self.time_step, np.round(spe_prices, 4).tolist()
-            )
+            return f"The SPE price of {self.agent} at time step {self.time_step} is {np.round(spe_price, 4)}"
         else:
-            return "The SPE prices for time step {} haven't been computed yet.".format(self.time_step)
+            return f"The SPE price for time step {self.time_step} hasn't been computed yet."
