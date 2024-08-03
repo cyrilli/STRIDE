@@ -1,6 +1,6 @@
 from rich.console import Console
 from envs.env_helper import get_env_param
-from agents.StriDe import StriDeAgent
+from agents.StriDe import StriDeAgent, StriDeFlowAgent
 import re
 import numpy as np
 from copy import deepcopy
@@ -76,8 +76,12 @@ def create_agents(env, logger, agent_type, agent_engine, mdp_known=True):
                        "V": np.zeros((env.epLen,env.nState)),
                        "Q": np.zeros((env.epLen,env.nState,env.nAction)),
                        }
-
-        agent = StriDeAgent(problem_description=env.description_of_problem_class, demo=demo, tool_names=tool_names_mdp_known, init_memory=init_memory, logger=logger, engine=agent_engine)
+        if agent_type == "stride":
+            demo = load_initial_instructions("envs/tabular_mdp/prompts/tabular_mdp_vi_exmps.txt")
+            agent = StriDeAgent(problem_description=env.description_of_problem_class, demo=demo, tool_names=tool_names_mdp_known, init_memory=init_memory, logger=logger, engine=agent_engine)
+        elif agent_type == "strideflow":
+            demo = load_initial_instructions("envs/tabular_mdp/prompts/tabular_mdp_viflow_exmps.txt")
+            agent = StriDeFlowAgent(problem_description=env.description_of_problem_class, demo=demo, tool_names=tool_names_mdp_known, init_memory=init_memory, logger=logger, engine=agent_engine)
         return {"agent":agent}
     
     elif env.name == "tabular_mdp" and not mdp_known:

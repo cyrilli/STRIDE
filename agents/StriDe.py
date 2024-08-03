@@ -303,3 +303,178 @@ class StriDeAgent:
                 err = "exit reasoning process due to failed thought generation, with the following error\n"+getattr(e, 'message', repr(e))
                 self.logger.write(err)
                 break
+
+
+class StriDeFlowAgent(StriDeAgent):
+    def __init__(self, problem_description, demo, tool_names, init_memory, logger, engine="gpt-3.5-turbo", llm_validator=False) -> None:
+        super().__init__(problem_description, demo, tool_names, init_memory, logger, engine, llm_validator)
+        self.initial_messages = [
+            {
+                "role":"system", 
+                "content":"You are a world class intelligent agent capable of solving various classes of decision making problems. For each decision making problem you encounter next, you will be given the description of the problem setup and your objective. Your need to carefully reason about the problem step by step, break apart the problem into logical branches of operations with corresponding condition at each step, and make optimal decisions for the encountered problem instance. You are provided with a set of tools and examples showing how to use these tools to solve this problem."
+             },
+             {
+                 "role":"assistant",
+                 "content":problem_description
+             }
+        ]
+        self.initial_messages += demo
+        self.messages = deepcopy(self.initial_messages)
+        # print(self.messages)
+
+    def reason(self, question):
+        tool_names = self.tool_names
+        ToolName = StrEnum('ToolName', tool_names)
+
+        class OperationBranch(BaseModel):
+            condition: Optional[str] = Field(
+                None,
+                description="the condition under which this branch of operations is executed"
+            )
+            operations: List[ToolName] = Field(
+                ...,
+                description="""The list of operations mentioned in your description for current operation branch. You can only choose from {}. Only the name of the operation is needed. Do not add the inputs! Do not repeat the same operation multiple times!""".format(tool_names),
+            )
+
+        def validator(self):  
+            if self.operation_plan != []:
+                previous_op_branch = None
+                merged_operation_plan = []
+                for op_branch in self.operation_plan:
+                    # for op_name in op_branch.operations: # verify for tool names
+                    #     if op_name not in tool_names:
+                    #         self.logger.write("==== validator ====")
+                    #         self.logger.write("You can only choose from {}. Only the name of the operation is needed. Do not add the inputs!""".format(tool_names))
+                    #         self.logger.write("====   end     ====")
+                    #         raise ValueError("You can only choose from {}. Only the name of the operation is needed. Do not add the inputs!""".format(tool_names))
+                    if previous_op_branch: # merge the operation branches with the same condition
+                        if op_branch.condition == previous_op_branch.condition:
+                            previous_op_branch.operations += op_branch.operations
+                        else:
+                            merged_operation_plan.append(previous_op_branch)
+                            previous_op_branch = op_branch
+                    else:
+                        previous_op_branch = op_branch
+                merged_operation_plan.append(previous_op_branch)
+                self.operation_plan = merged_operation_plan
+
+            if self.operation_plan != [] and self.exit: # verify for exit
+                self.logger.write("==== validator ====")
+                self.logger.write("Conflict detected: By setting Exit to True, you won't be able to execute any of the selected operation branch. Please carefully check whether you have finished reasoning.")
+                self.logger.write("====   end     ====")
+                raise ValueError("Conflict detected: By setting Exit to True, you won't be able to execute any of the selected operation branch. Please carefully check whether you have finished reasoning.")
+            return self
+        
+        class Thought(BaseModel):
+            text: str = Field(
+                ...,
+                description="a textual description of the current step of reasoning, think deeply and come up with a detailed plan of operations to be executed based on the current Thought"
+            )
+            exit: bool = Field(
+                ...,
+                description="set to True, if it is time to exit reasoning process",
+                # """Set exit to True only when you have finished the whole reasoning process and made a decision about the answer. Be very careful not to exit before you have finished reasoning!""",
+            )
+            operation_plan: List[OperationBranch] = Field(
+                ...,
+                description='''list of operation branches to be executed based on the current Thought. If there is iteration or loop involved in the plan, flatten it out by specifying the variable under iteration and its value as the condition, and the operation branch to be done under such iteration condition.'''
+            )
+
+            @model_validator(mode="after")
+            def chain_of_thought_makes_sense(self):
+                return validator(self)
+        
+        self.messages_current_question = []
+        self.messages.append({"role":"user", "content":"Question: "+question})
+        self.messages_current_question.append({"role":"user", "content":"Question: "+question})
+        self.logger.write("Question: "+question)
+        try:
+            thought: Thought = self.client.chat.completions.create(
+                model=self.engine,
+                temperature=0,
+                response_model=Thought,
+                messages=self.messages,
+                max_tokens=1000,
+                max_retries=tenacity.Retrying(
+                    stop=tenacity.stop_after_attempt(4),
+                ),
+            )
+            self.messages.append({"role":"assistant", "content":"Thought: "+thought.text})
+            self.messages_current_question.append({"role":"assistant", "content":"Thought: "+thought.text})
+            self.logger.write("Thought: "+thought.text)
+            # print(thought.operation_plan)
+        except Exception as e:
+            err = "exit reasoning process due to failed thought generation, with the following error\n"+getattr(e, 'message', repr(e))
+            self.logger.write(err)
+            print(self.messages)
+            return
+        
+        while not thought.exit:
+            if thought.operation_plan == []:
+                break
+            for op_branch in thought.operation_plan:
+                if op_branch.operations == []:
+                    break
+                else:
+                    op_branch_text = {'condition': op_branch.condition, 'operations': [op.name for op in op_branch.operations]}
+                    op_branch_text = f"Operation Branch: {op_branch_text}"
+                    self.messages.append({"role":"assistant", "content":op_branch_text})
+                    self.messages_current_question.append({"role":"assistant", "content":op_branch_text})
+                    self.logger.write(op_branch_text)
+                    
+                    branch_inputs = {}
+                    for op_name in op_branch.operations:
+                        try: # try to execute the operation with the inputs from the branch inputs
+                            op = eval(op_name.name)(**branch_inputs)
+                            op_text = "Operation: call function {} with inputs {} from branch inputs".format(op_name.name, op)
+                        except:
+                            op = self.client.chat.completions.create(
+                                model=self.engine,
+                                temperature=0,
+                                response_model=eval(op_name.name),
+                                # messages=[{"role":"system", "content":"Based on the description of the problem instance and the Thought, output the operation to be taken."},{"role":"assistant", "content":self.instance_descript+"\nThought: "+thought.text}],
+                                messages=[{"role":"system", "content":"Based on the description of the problem instance and the Thought sequence so far, output the operation to be taken."}]+self.messages[len(self.initial_messages):],
+                                max_tokens=1000,
+                                max_retries=tenacity.Retrying(
+                                    stop=tenacity.stop_after_attempt(3),
+                                ),
+                            )
+                            op_text = "Operation: call function {} with inputs {} from context".format(op_name.name, op)
+                            branch_inputs.update(op.dict())
+                        self.logger.write(op_text)
+                        self.messages.append({"role":"assistant", "content":op_text})
+                        self.messages_current_question.append({"role":"assistant", "content":op_text})
+
+                        try:
+                            res_text = op.execute(self.working_memory)
+                            self.logger.write("Result: {}".format(res_text))
+                            self.messages.append({"role":"assistant", "content":"Result: {}".format(res_text)})
+                        except Exception as e:
+                            res_text = "Result: execution of {} failed, with the following error\n".format(op_name.name)+getattr(e, 'message', repr(e))
+                            self.logger.write(res_text)
+            
+            try:
+                thought: Thought = self.client.chat.completions.create(
+                    model=self.engine,
+                    temperature=0,
+                    response_model=Thought,
+                    messages=self.messages,
+                    max_tokens=1000,
+                    max_retries=tenacity.Retrying(
+                        stop=tenacity.stop_after_attempt(4),
+                    ),
+                )
+                self.messages.append({"role":"assistant", "content":"Thought: "+thought.text})
+                self.messages_current_question.append({"role":"assistant", "content":"Thought: "+thought.text})
+                self.logger.write("Thought: "+thought.text)
+                # print(thought.operation_plan)
+
+            except Exception as e:
+                err = "exit reasoning process due to failed thought generation, with the following error\n"+getattr(e, 'message', repr(e))
+                self.logger.write(err)
+                break
+    
+
+
+
+        
