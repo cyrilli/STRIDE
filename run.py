@@ -177,7 +177,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--env', type=str, default="tabular_mdp", help="[tabular_mdp, dynamic_mechanism_design, bargain_alternate_singleissue, bargain_onesided_uncertainty]")
     parser.add_argument('--mdp_known', type=bool, default=True)
-    parser.add_argument('--agent_type', type=str, default="stride", help="[stride]")
+    parser.add_argument('--agent_type', type=str, default="stride", help="[stride, strideflow]")
     parser.add_argument('--agent_engine', type=str, default="gpt-4o", help="[gpt-3.5-turbo, gpt-4o, gpt-4-turbo]")
     parser.add_argument('--random_param', type=bool, default=True)
     parser.add_argument('--n_exps', type=int, default=1, help='number of times to play in the environment')
