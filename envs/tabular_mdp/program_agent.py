@@ -79,6 +79,92 @@ class VIAgent():
         return a
 
 
+class VIFlowAgent():
+    def __init__(self, working_memory, exmps_file):
+        '''
+        With operation branch reasoning, consistent with StrideFlowAgent.
+        Tabular episodic learner for time-homoegenous MDP.
+        Must be used together with true state feature extractor.
+
+        Args:
+            working_memory
+            exmps_file
+        '''
+        self.working_memory = working_memory
+        self.exmps_file = exmps_file
+
+    def compute_policy(self):
+        with open(self.exmps_file, "a") as f:
+            f.write("==== USER ====\n")
+            # f.write("Question: How do I compute the optimal Q values for this MDP instance using value iteration?\n")
+            f.write("Question: Now compute the optimal policy, that is, the optimal action at each step and each state.\n")
+            last_time_step = self.working_memory["epLen"]-1
+            f.write(f"Thought: We can compute the optimal policy by value iteration, which iterates from the last time step {last_time_step} back to the first time step 0. **At the last time step {last_time_step}**, since the episode terminate at this step, the one-step lookahead is zero. Thus the Q values simply equal the immediate reward of each state-action pair. To compute the Q values, we only need to **First** call function UpdateQbyR to add the immediate rewards, **Second** then the V values can be computed by calling UpdateV, which takes maximum of the Q values over actions. **For time step {reversed(range(last_time_step))}**, under the idea of dynamic programming, we compute the Q values in two steps. **First**, add the immediate rewards by calling function UpdateQbyR. **Second** add the one-step lookahead by calling function UpdateQbyPV. **Third** Then the V values can be computed by calling UpdateV, which takes maximum of the Q values over actions.\n")
+        for time in reversed(range(self.working_memory["epLen"])):
+            inputs = {"time_step":time}
+            if time == last_time_step:
+                with open(self.exmps_file, "a") as f:
+                    op_branch = {"condition": f"time_step={time}", "operations": ["UpdateQbyR", "UpdateV"]}
+                    f.write("Operation Branch: {}\n".format(op_branch))
+                    f.write("Operation: call function UpdateQbyR with inputs {}.\n".format(inputs))
+                    f.write("Result: Q values for time step {} are updated with the immediate rewards and stored in the working memory.\n".format(time))
+                    f.write("Operation: call function UpdateV with inputs {}.\n".format(inputs))
+                    f.write("Result: V values for time step {} are updated based on the computed Q values and stored in the working memory.\n".format(time))
+                op = UpdateQbyR(time_step=inputs["time_step"])
+                op.execute(working_memory=self.working_memory)
+                op = UpdateV(time_step=inputs["time_step"])
+                op.execute(working_memory=self.working_memory)
+
+            else:
+                with open(self.exmps_file, "a") as f:
+                    op_branch = {"condition": f"time_step={time}", "operations": ["UpdateQbyR", "UpdateQbyPV", "UpdateV"]}
+                    f.write("Operation Branch:{}\n".format(op_branch))
+                    f.write("Operation: call function UpdateQbyR with inputs {}.\n".format(inputs))
+                    f.write("Result: Q values for time step {} are updated with the immediate rewards and stored in the working memory.\n".format(time))
+                    f.write("Operation: call function UpdateQbyPV with inputs {}.\n".format(inputs))
+                    f.write("Result: Q values for time step {} are updated with the one-step look ahead and stored in the working memory.\n".format(time))
+                    f.write("Operation: call function UpdateV with inputs {}.\n".format(inputs))
+                    f.write("Result: V values for time step {} are updated based on the computed Q values and stored in the working memory.\n".format(time))
+
+                op = UpdateQbyR(time_step=inputs["time_step"])
+                op.execute(working_memory=self.working_memory)
+                op = UpdateQbyPV(time_step=inputs["time_step"])
+                op.execute(working_memory=self.working_memory)
+                op = UpdateV(time_step=inputs["time_step"])
+                op.execute(working_memory=self.working_memory)
+
+        with open(self.exmps_file, "a") as f:
+            f.write("Thought: The Q values from the last time step {} to time step 0 have now been calculated. We should exit the reasoning process.\n".format(self.working_memory["epLen"]-1))
+
+    def move(self, state_struct):
+        with open(self.exmps_file, "a") as f:
+            f.write("==== USER ====\n")
+            f.write(state_struct.textual_descript+"\n")
+            # f.write("\nQuestion: {} Which action I should choose?\n".format(state_struct.textual_descript))
+            # f.write("Thought: I should retrieve the Q values for current state, which is {}, and time step, which is {}.\n".format(state_struct.mathematical_descript, state_struct.time_step))
+            f.write("Thought: **First** I should retrieve the Q values for current state, which is {}, and time step, which is {}. **Second** Then I should call function GetArgMax to get the action indices corresponding to the maximal value in the result list obtained from the retrieved Q values.\n".format(state_struct.mathematical_descript, state_struct.time_step))
+            op_branch = {"condition": f"time_step={state_struct.time_step}, state={state_struct.mathematical_descript}", "operations": ["GetQ", "GetArgMax"]}
+            f.write("Operation Branch: {}\n".format(op_branch))
+            inputs = {"time_step": state_struct.time_step, "state": state_struct.mathematical_descript}
+            f.write("Operation: call function GetQ with inputs {}.\n".format(inputs))
+        op = GetQ(time_step=inputs["time_step"], state=inputs["state"])
+        qvalues = op.execute(working_memory=self.working_memory)
+        with open(self.exmps_file, "a") as f:
+            f.write("Result: {}.\n".format(qvalues))
+
+        with open(self.exmps_file, "a") as f:
+            # f.write("Thought: I should call function GetArgMax to get the action indices corresponding to the maximal value in the list {}.\n".format(qvalues))
+            inputs = {"number_list":qvalues.tolist()}
+            f.write("Operation: call function GetArgMax with inputs {}.\n".format(inputs))
+        op = GetArgMax(number_list=qvalues)
+        max_indices = op.execute(working_memory=self.working_memory)
+        with open(self.exmps_file, "a") as f:
+            f.write("Result: {}.\n".format(max_indices.tolist()))
+            a = np.random.choice(max_indices)
+            f.write("Thought: Now I can exit the reasoning process, and choose action {}, as it maximizes the Q value (break the tie randomly if there are multiple maximums).\n".format(a))
+        return a
+
+
 class UCBVIAgent():
     def __init__(self, working_memory, exmps_file, write_exmps):
         '''
