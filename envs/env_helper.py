@@ -115,6 +115,43 @@ def get_env_param(env_name, random_param=False):
             P_true[nState - 1, 1][nState - 1] = 0.6
             P_true[nState - 1, 1][nState - 2] = 0.4
             return {"nState":nState, "nAction":nAction, "epLen":epLen, "R":R_true, "P":P_true}
+    elif env_name == "sorted_array_search":
+        A = [12,36,40,48,78,87,89,91,92,54,55,57,58,59,67,14,19,36]
+        T = 89
+        return {"A":A, "T":T}
+    
+    elif env_name == "shortest_path_problem":
+            nodes= [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+            edges= [{'from': 0, 'to': 5, 'weight': 4},
+                    {'from': 5, 'to': 9, 'weight': 8},
+                    {'from': 9, 'to': 12, 'weight': 7},
+                    {'from': 12, 'to': 13, 'weight': 5},
+                    {'from': 12, 'to': 7, 'weight': 5},
+                    {'from': 7, 'to': 3, 'weight': 3},
+                    {'from': 3, 'to': 2, 'weight': 7},
+                    {'from': 6, 'to': 0, 'weight': 10},
+                    {'from': 8, 'to': 6, 'weight': 9},
+                    {'from': 2, 'to': 8, 'weight': 14},
+                    {'from': 11, 'to': 10, 'weight': 11},
+                    {'from': 10, 'to': 4, 'weight': 10},
+                    {'from': 4, 'to': 1, 'weight': 6},
+                    {'from': 1, 'to': 11, 'weight': 2},
+                    {'from': 11, 'to': 12, 'weight': 3},
+                    {'from': 4, 'to': 5, 'weight': 4},
+                    {'from': 5, 'to': 10, 'weight': 2},
+                    ]            
+            return {"nodes":nodes,"edges":edges}
+    
+    elif env_name == "edit_distance_problem":
+        A = "jjukonwsqepn"
+        B = "jprxcgvxpnis"
+
+        return {"A":A, "B":B}
+    
+    elif env_name == "knapsack_problem":
+        items = [(5, 2), (6, 9), (14, 10), (1,11), (5,2), (4,10), (6,1), (6,13), (4,3), (3,10), (7,9), (4,11), (7,5), (8,6)]
+        capacity = 65
+        return {"items":items, "capacity":capacity}
     else:
         raise ValueError("Unknown game {}".format(env_name))
 
