@@ -38,7 +38,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--game', type=str, default="ieds")
     parser.add_argument('--random_param', action='store_true', default=False, help="Whether to use random parameters for the game")
-    parser.add_argument('--num_strategies', nargs="+", type=int, help="Number of strategies for each player")
+    parser.add_argument('--num_strategies', nargs="+", type=int, default=[5,5], help="Number of strategies for each player")
     parser.add_argument('--num_pne', type=int, default=1, help="Number of PNE in the game")
     parser.add_argument('--seed', type=int, default=0, help="Random seed")
     args = parser.parse_args()
