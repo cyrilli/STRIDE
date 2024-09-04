@@ -385,7 +385,7 @@ def generate_payoff_bimatrix_with_multiple_pne(num_strategies_player1: int, num_
     n = num_strategies_player2
 
     # Ensure number of PNEs does not exceed the minimum number of strategies for both players
-    assert num_pne <= min(m, n), "Number of PNEs must be less than or equal to the minimum number of strategies for both players."
+    assert num_pne < min(m, n), "Number of PNEs must be less than the minimum number of strategies for both players."
 
     # Initialize empty payoff matrices for Player 1 (A) and Player 2 (B)
     A = np.zeros((num_pne, num_pne), dtype=int)
