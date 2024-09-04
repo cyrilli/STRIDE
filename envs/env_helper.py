@@ -19,7 +19,7 @@ class BaseEnv:
     def step(self, action):
         pass
 
-def get_env_param(env_name, random_param=True, num_pne=1, num_strategies=[5, 5]):
+def get_env_param(env_name, random_param=True, num_pne=1, num_strategies=None):
     if env_name == "bargain_alternate_singleissue":
         if random_param:
             # random.randint(3,4)
