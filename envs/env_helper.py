@@ -19,7 +19,7 @@ class BaseEnv:
     def step(self, action):
         pass
 
-def get_env_param(env_name, random_param=False):
+def get_env_param(env_name, random_param=True, num_pne=1, num_strategies=[5, 5]):
     if env_name == "bargain_alternate_singleissue":
         if random_param:
             # random.randint(3,4)
@@ -114,9 +114,365 @@ def get_env_param(env_name, random_param=False):
             P_true[0, 1][1] = 0.6
             P_true[nState - 1, 1][nState - 1] = 0.6
             P_true[nState - 1, 1][nState - 2] = 0.4
-            return {"nState":nState, "nAction":nAction, "epLen":epLen, "R":R_true, "P":P_true}
+            return {"nState": nState, "nAction": nAction, "epLen": epLen, "R": R_true, "P": P_true}
+        
+    elif env_name == "ieds":
+        if random_param:
+            # Unique PNE
+            if num_pne == 1:
+                payoff1, payoff2 = generate_payoff_bimatrix_with_unique_pne(num_strategies[0], num_strategies[1])
+                return {
+                    "num_players": 2,
+                    "strategies_per_player": [num_strategies[0], num_strategies[1]],
+                    "payoff_matrix": [payoff1.tolist(), payoff2.tolist()]
+                }
+            # No PNE
+            elif num_pne == 0:
+                payoff1, payoff2 = generate_payoff_bimatrix_with_no_pne(num_strategies[0], num_strategies[1])
+                return {
+                    "num_players": 2,
+                    "strategies_per_player": [num_strategies[0], num_strategies[1]],
+                    "payoff_matrix": [payoff1.tolist(), payoff2.tolist()]
+                }
+            # Multiple PNE
+            else:
+                payoff1, payoff2 = generate_payoff_bimatrix_with_multiple_pne(num_strategies[0], num_strategies[1], num_pne)
+                return {
+                    "num_players": 2,
+                    "strategies_per_player": [num_strategies[0], num_strategies[1]],
+                    "payoff_matrix": [payoff1.tolist(), payoff2.tolist()]
+                }
+        else:
+            # fixed payoff matrix
+            # payoff_matrix = [[[10, 10], [9, 11]], [[10, 9], [10, 8]]]
+            # payoff_matrix = [[[10, 10, 8], [9, 11, 11], [8, 9, 9]], [[10, 9, 8], [10, 9, 8], [8, 11, 7]]]
+            # payoff_matrix = [[[0, 0], [0, 1]], [[0, 0], [0, 1]]]
+            # payoff_matrix =  [[[5, 6], [8, 2]], [[5, 4], [7, 8]]]
+            # payoff_matrix = [[[-5, 2, 3], [1, 1, 1], [0, 0, 0]], [[-1, 2, 3], [-3, 2, 1], [10, 0, -10]]]
+            # payoff_matrix = [[
+            #     [2, 3, 2, 1],   # Row A
+            #     [8, 5, 4, 7],   # Row B
+            #     [100, 2, 1, 3], # Row C
+            #     [3, 6, 2, 0]    # Row D
+            # ]
+            # ,[
+            #     [1, 10, 9, 3],  # Row A
+            #     [7, 8, 9, 11],  # Row B
+            #     [9, 11, 2, 3],  # Row C
+            #     [0, 1, 2, 0]    # Row D
+            # ]]
+            payoff_matrix = [
+                [[12,  6,  7,  8],
+                [17,  3,  4,  5],
+                [18,  4,  5,  6],
+                [19,  5,  6,  7]],
+                [[19,  4,  5,  6],
+                [ 1,  8, 9, 10],
+                [ 2,  9, 10, 11],
+                [ 3, 10, 11, 12]]]
+            num_players = len(payoff_matrix)
+            strategies_per_player = [len(payoff_matrix[0]), len(payoff_matrix[0][0])]
+            return {
+                "num_players": num_players,
+                "strategies_per_player": strategies_per_player,
+                "payoff_matrix": payoff_matrix
+            }
     else:
         raise ValueError("Unknown game {}".format(env_name))
+
+def generate_payoff_bimatrix_with_no_pne(num_strategies_player1: int, num_strategies_player2: int):
+    """
+    Generates a random game with no pure Nash Equilibrium using iterated elimination of dominated strategies.
+
+    Args:
+        num_strategies_player1: Number of strategies for Player 1.
+        num_strategies_player2: Number of strategies for Player 2.
+
+    Returns:
+        A tuple containing two numpy arrays representing the payoff matrices for Player 1 and Player 2.
+    """
+    if num_strategies_player1 <= 0 or num_strategies_player2 <= 0:
+        raise ValueError("Number of strategies must be positive integers")
+    
+    elif num_strategies_player1 == 1 and num_strategies_player2 == 1:
+        raise ValueError("Game must have at least two strategies for each player")
+    
+    else:
+        # Generate distinct scores for each strategy
+        # initial_value_a = np.random.randint(5, 20)
+        # initial_value_b = np.random.randint(5, 20)
+        initial_value_a = 1
+        initial_value_b = 0
+
+        m = num_strategies_player1
+        n = num_strategies_player2
+        A = np.zeros((m, n), dtype=int)
+        B = np.zeros((m, n), dtype=int)
+        
+        # Fill in the matrices using the antisymmetric property
+        for i in range(m):
+            for j in range(n):
+                if (i + j) % 2 == 0:
+                    A[i, j] = initial_value_a
+                    B[i, j] = initial_value_b
+                else:
+                    A[i, j] = initial_value_a
+                    B[i, j] = initial_value_b
+        
+        print("Payoff Matrix for Player 1: \n", A)
+        print("Payoff Matrix for Player 2: \n", B)
+        return A, B
+
+def generate_payoff_bimatrix_with_unique_pne(num_strategies_player1: int, num_strategies_player2: int):
+    """
+    Generates a random bi-matrix game with a unique pure Nash Equilibrium using iterated elimination of dominated strategies.
+
+    Args:
+        num_strategies_player1: Number of strategies for Player 1.
+        num_strategies_player2: Number of strategies for Player 2.
+
+    Returns:
+        A tuple containing two numpy arrays representing the payoff matrices for Player 1 and Player 2.
+    """
+    def add_dominated_row(A, B, increment):
+        min_values_A = np.min(A, axis=0)
+        new_row_A = min_values_A - increment
+        A = np.vstack((A, new_row_A))
+
+        new_row_B = np.zeros(A.shape[1], dtype=int)
+        for i in range(A.shape[1]):
+            if i == 0:
+                new_row_B[i] = np.min(B[:, i]) - increment
+            else:
+                new_row_B[i] = np.max(B[:, i-1]) + increment
+        
+        B = np.vstack((B, new_row_B))
+        return A, B
+
+    def add_dominated_column(A, B, increment):
+        min_values_B = np.min(B, axis=1)
+        new_col_B = min_values_B - increment
+        B = np.column_stack((B, new_col_B))
+
+        new_col_A = np.zeros(B.shape[0], dtype=int)
+        for i in range(B.shape[0]):
+            if i == 0:
+                new_col_A[i] = np.min(A[i, :]) - increment
+            else:
+                new_col_A[i] = np.max(A[i-1, :]) + increment
+
+        A = np.column_stack((A, new_col_A))
+        return A, B
+    
+    if num_strategies_player1 <= 0 or num_strategies_player2 <= 0:
+        raise ValueError("Number of strategies must be positive integers")
+    
+    elif num_strategies_player1 == 1 and num_strategies_player2 == 1:
+        raise ValueError("Game must have at least two strategies for each player")
+    
+    elif num_strategies_player1 == num_strategies_player2:
+        # Scenario 1: n x n bi-matrix game with unique PNE
+        n = num_strategies_player1
+        print("Number of strategies for each player: ", n)
+
+        initial_value = np.random.randint(30, 50)
+        increment = np.random.randint(1, 5)
+        # increment = 1
+        A = np.array([[initial_value, initial_value], 
+                  [initial_value - increment, initial_value + increment]])
+        B = np.array([[initial_value, initial_value - increment], [initial_value, initial_value - increment]])
+
+        # Expand the matrices alternately to ensure unique IEDS order
+        for size in range(3, n + 1):
+            if A.shape[0] < n:  # Add row if needed
+                A, B = add_dominated_row(A, B, increment)
+
+            if B.shape[1] < n:  # Add column if needed
+                A, B = add_dominated_column(A, B, increment)
+
+        A, B, _, _ = permute_payoff_matrices([A, B])
+
+        print("Payoff Matrix for Player 1: \n", A)
+        print("Payoff Matrix for Player 2: \n", B)
+        return A, B
+
+    elif num_strategies_player1 > num_strategies_player2:
+        # Scenario 2: m x n (m > n) bi-matrix game with unique IEDS order
+        m = num_strategies_player1
+        n = num_strategies_player2
+        print("WARNING: The order of IEDS will not be unique for this case.")
+        print("Number of strategies for Player 1: ", m)
+        print("Number of strategies for Player 2: ", n)
+
+        initial_value = np.random.randint(30, 50)
+        increment = np.random.randint(1, 5)
+
+        A = np.array([[initial_value, initial_value], [initial_value - increment, initial_value + increment]])
+        B = np.array([[initial_value, initial_value - increment], [initial_value, initial_value - increment]])
+
+        if n < len(B) and n == 1:
+            B = np.delete(B, 1, axis=0)
+            A = np.delete(A, 1, axis=0)
+
+        # Building the base n x n matrix
+        for size in range(3, n + 1):
+            A, B = add_dominated_row(A, B, increment)
+            A, B = add_dominated_column(A, B, increment)
+
+        # Expanding to m x n by adding rows
+        while A.shape[0] < m:
+            A, B = add_dominated_row(A, B, increment)
+        
+        A, B, _, _ = permute_payoff_matrices([A, B])
+
+        print("Payoff Matrix for Player 1: \n", A)
+        print("Payoff Matrix for Player 2: \n", B)
+
+        return A, B
+
+    elif num_strategies_player1 < num_strategies_player2:
+        # Scenario 3: m x n (m < n) bi-matrix game with unique IEDS order
+        m = num_strategies_player1
+        n = num_strategies_player2
+        print("WARNING: The order of IEDS will not be unique for this case.")
+        print("Number of strategies for Player 1: ", m)
+        print("Number of strategies for Player 2: ", n)
+
+        initial_value = np.random.randint(30, 50)
+        increment = np.random.randint(1, 5)
+
+        A = np.array([[initial_value, initial_value], [initial_value - increment, initial_value + increment]])
+        B = np.array([[initial_value, initial_value - increment], [initial_value, initial_value - increment]])
+
+        temp = A
+        A = np.transpose(B)
+        B = np.transpose(temp)
+
+        if m < len(A) and m == 1:
+            A = np.delete(A, 1, axis=0)
+            B = np.delete(B, 1, axis=0)
+
+        # Building the base m x m matrix
+        for size in range(3, m + 1):
+            A, B = add_dominated_row(A, B, increment)
+            A, B = add_dominated_column(A, B, increment)
+
+        # Expanding to m x n by adding columns
+        while B.shape[1] < n:
+            A, B = add_dominated_column(A, B, increment)
+
+        A, B, _, _ = permute_payoff_matrices([A, B])
+
+        print("Payoff Matrix for Player 1: \n", A)
+        print("Payoff Matrix for Player 2: \n", B)
+
+        return A, B
+
+def generate_payoff_bimatrix_with_multiple_pne(num_strategies_player1: int, num_strategies_player2: int, num_pne: int):
+    """
+    Generates a random game with multiple pure Nash Equilibria to be solvable using iterated elimination of dominated strategies.
+    
+    Args:
+    - num_strategies_player1 (int): Number of strategies for Player 1.
+    - num_strategies_player2 (int): Number of strategies for Player 2.
+    - num_pne (int): Number of pure Nash Equilibria desired.
+
+    Returns:
+    - A (np.array): Payoff matrix for Player 1.
+    - B (np.array): Payoff matrix for Player 2.
+    """
+    m = num_strategies_player1
+    n = num_strategies_player2
+
+    # Ensure number of PNEs does not exceed the minimum number of strategies for both players
+    assert num_pne <= min(m, n), "Number of PNEs must be less than or equal to the minimum number of strategies for both players."
+
+    # Initialize empty payoff matrices for Player 1 (A) and Player 2 (B)
+    A = np.zeros((num_pne, num_pne), dtype=int)
+    B = np.zeros((num_pne, num_pne), dtype=int)
+
+    # Generate the initial l x l base matrix with PNEs on the diagonal
+    initial_value = 10
+    increment = 1
+    
+    for i in range(num_pne):
+        for j in range(num_pne):
+            if i == j:
+                A[i, j] = initial_value
+                B[i, j] = initial_value
+            else:
+                A[i, j] = A[i, i] - abs(i - j)
+                B[i, j] = B[i, i] - abs(i - j)
+
+    def add_dominated_row(A, B, increment):
+        min_values_A = np.min(A, axis=0)
+        new_row_A = min_values_A - increment
+        A = np.vstack((A, new_row_A))
+
+        new_row_B = np.zeros(A.shape[1], dtype=int)
+        for i in range(A.shape[1]):
+            if i == 0:
+                new_row_B[i] = np.min(B[:, i]) - increment
+            else:
+                new_row_B[i] = np.max(B[:, i-1]) + increment
+        
+        B = np.vstack((B, new_row_B))
+        return A, B
+
+    def add_dominated_column(A, B, increment):
+        min_values_B = np.min(B, axis=1)
+        new_col_B = min_values_B - increment
+        B = np.column_stack((B, new_col_B))
+
+        new_col_A = np.zeros(B.shape[0], dtype=int)
+        for i in range(B.shape[0]):
+            if i == 0:
+                new_col_A[i] = np.min(A[i, :]) - increment
+            else:
+                new_col_A[i] = np.max(A[i-1, :]) + increment
+
+        A = np.column_stack((A, new_col_A))
+        return A, B
+
+    # Expand the l x l base matrix to m x n matrix
+    for size in range(num_pne, max(m, n)):
+        if A.shape[0] < m:  # Add a row if needed
+            A, B = add_dominated_row(A, B, increment)
+        if B.shape[1] < n:  # Add a column if needed
+            A, B = add_dominated_column(A, B, increment)
+
+    print("Payoff Matrix for Player 1: \n", A)
+    print("Payoff Matrix for Player 2: \n", B)
+    
+    return A, B
+
+def permute_matrix(matrix, row_permutation, col_permutation):
+    """Permutes the rows and columns of a matrix using given permutations."""
+    permuted_matrix = matrix.copy()
+
+    # Apply the provided permutations
+    permuted_matrix = permuted_matrix[row_permutation, :]
+    permuted_matrix = permuted_matrix[:, col_permutation]
+    return permuted_matrix
+
+def permute_payoff_matrices(payoff_matrices):
+    """Permutes the rows and columns of the payoff matrices for all players using the same permutations."""
+    
+    # Get the shape of the matrices
+    n_rows, n_cols = payoff_matrices[0].shape
+    
+    # Generate the same random permutations for both matrices
+    row_permutation = np.random.permutation(n_rows)
+    col_permutation = np.random.permutation(n_cols)
+
+    # Apply the same permutation to both payoff matrices
+    permuted_matrices = []
+    for matrix in payoff_matrices:
+        permuted_matrix = permute_matrix(np.array(matrix), row_permutation, col_permutation)
+        permuted_matrices.append(permuted_matrix)
+
+    # Return the permuted matrices along with the applied permutations
+    return permuted_matrices[0], permuted_matrices[1], row_permutation, col_permutation
 
 def _randDense(states, actions, mask):
     """Generate random dense ``P`` and ``R``. See ``rand`` for details.
