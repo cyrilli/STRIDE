@@ -143,24 +143,7 @@ def get_env_param(env_name, random_param=True, num_pne=1, num_strategies=None):
                     "payoff_matrix": [payoff1.tolist(), payoff2.tolist()]
                 }
         else:
-            # fixed payoff matrix
-            # payoff_matrix = [[[10, 10], [9, 11]], [[10, 9], [10, 8]]]
-            # payoff_matrix = [[[10, 10, 8], [9, 11, 11], [8, 9, 9]], [[10, 9, 8], [10, 9, 8], [8, 11, 7]]]
-            # payoff_matrix = [[[0, 0], [0, 1]], [[0, 0], [0, 1]]]
-            # payoff_matrix =  [[[5, 6], [8, 2]], [[5, 4], [7, 8]]]
-            # payoff_matrix = [[[-5, 2, 3], [1, 1, 1], [0, 0, 0]], [[-1, 2, 3], [-3, 2, 1], [10, 0, -10]]]
-            # payoff_matrix = [[
-            #     [2, 3, 2, 1],   # Row A
-            #     [8, 5, 4, 7],   # Row B
-            #     [100, 2, 1, 3], # Row C
-            #     [3, 6, 2, 0]    # Row D
-            # ]
-            # ,[
-            #     [1, 10, 9, 3],  # Row A
-            #     [7, 8, 9, 11],  # Row B
-            #     [9, 11, 2, 3],  # Row C
-            #     [0, 1, 2, 0]    # Row D
-            # ]]
+            # fixed payoff bi-matrix
             payoff_matrix = [
                 [[12,  6,  7,  8],
                 [17,  3,  4,  5],
