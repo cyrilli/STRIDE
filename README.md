@@ -21,6 +21,8 @@ We have implemented the following environments to evaluate STRIDE.
 ## Instructions
 
 ### How to run
+First, add your OpenAI api key in the file .env
+
 Execute `run.py` to run STRIDE on different environments. For example,
 ```
 python run.py --env tabular_mdp --mdp_known True --agent_engine gpt-4o
