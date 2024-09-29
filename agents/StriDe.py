@@ -20,6 +20,10 @@ from envs.tabular_mdp.tools import *
 from envs.dynamic_mechanism_design.tools import *
 from envs.bargain_alternate_singleissue.tools import *
 from envs.bargain_onesided_uncertainty.tools import *
+from envs.sorted_array_search.tools import *
+from envs.shortest_path_problem.tools import *
+from envs.edit_distance_problem.tools import *
+from envs.knapsack_problem.tools import *
 
 types = {
     'string': str,

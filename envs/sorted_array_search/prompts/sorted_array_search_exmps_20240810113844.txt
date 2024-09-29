@@ -1,0 +1,73 @@
+==== ASSISTANT ====
+Now you are going to find the position of the target value T = 91 within the array A = [12, 36, 40, 48, 78, 87, 89, 91, 92, 54, 55, 57, 58, 59, 67, 14, 19, 36] after it gets sorted, which will be stored in the working memory.
+==== USER ====
+
+Question: In which index is T = 91 located when the array  A = [12, 36, 40, 48, 78, 87, 89, 91, 92, 54, 55, 57, 58, 59, 67, 14, 19, 36] is sorted?
+
+Thought: First, I have to sort array A.
+
+Operation: call function sort_array with inputs {}.
+
+Thought: Now, I should find the middle index of the array A = [12, 14, 19, 36, 36, 40, 48, 54, 55, 57, 58, 59, 67, 78, 87, 89, 91, 92] in order to compare the target value T = 91 with it. For this I should initialize the left and right index. Since we are in time_step = 0 and the length of the array is 18, I will set the left index 0 and the right index 17.
+
+Operation: call function init_leftright_index with inputs {}.
+
+Result: The left index is 0 and the right index is 17.
+
+Thought: My strategy is to check the middle index between the left and right index until I either find the target value or the left index becomes bigger than the right index. Now lets compute the middle index with respect to the left index 0 and the right index 17.
+
+Operation: call function findmidindex with inputs {}.
+
+Result: The middle index is 8.
+
+Thought: Now lets see that if the middle index value of the array equals the target value. For this I have to see the value of 'mid' index = 8 in the array and compare it to the target value 91.
+
+Operation: call function CheckIndexVal with inputs {}.
+
+Result: Since the value of the middle index 55 was not equal to the target value 91, I will continue to find the target value.
+
+Thought: Now lets update the 'left' and 'right' index based on the new 'mid' = 8 index.
+
+Operation: call function find_leftright_index with inputs {}
+
+Result: The left index is 9 and the right index is 17.
+
+Thought: Now lets check whether the left index is bigger than the right index or not.
+Operation: call function Check_left_right with inputs {}
+
+Result: The left index is not bigger than the right index therefore we can continue.
+Thought: Now lets compute the middle index with respect to the left index 9 and the right index 17.
+
+Operation: call function findmidindex with inputs {}.
+
+Result: The middle index is 13.
+
+Thought: Now lets see that if the middle index value of the array equals the target value. For this I have to see the value of 'mid' index = 13 in the array and then compare it with the target value 91.
+
+Operation: call function CheckIndexVal with inputs {}.
+
+Result: Since the value of the middle index 78 was not equal to the target value 91, I will continue to find the target value.
+
+Thought: Now lets update the 'left' and 'right' index based on the new 'mid' = 13 index.
+
+Operation: call function find_leftright_index with inputs {}
+
+Result: The left index is 14 and the right index is 17.
+
+Thought: Now lets check whether the left index is bigger than the right index or not.
+Operation: call function Check_left_right with inputs {}
+
+Result: The left index is not bigger than the right index therefore we can continue.
+Thought: Now lets compute the middle index with respect to the left index 14 and the right index 17.
+
+Operation: call function findmidindex with inputs {}.
+
+Result: The middle index is 16.
+
+Thought: Now lets see that if the middle index value of the array equals the target value. For this I have to see the value of 'mid' index = 16 in the array and then compare it with the target value 91.
+
+Operation: call function CheckIndexVal with inputs {}.
+
+Result: The value of middle index 16 equals the target value.
+
+Thought: The index is 16.

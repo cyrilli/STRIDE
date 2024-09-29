@@ -1,0 +1,163 @@
+==== ASSISTANT ====
+Now you are going to find the most efficient path between vertice start = 0 and vertice end = 13 in a weighted graph
+==== USER ====
+
+Question: What is the shortest distance between vertex 'start' = 0 and 'end' = 13 in graph G?
+Thought: I will use Dijkstra's algorithm for solving this problem. I will use a dictionary called 'dists' for storing the distances from the starting point in the working memory. I need to initialize 'dists'.
+Operation: call function InitDistTable with inputs {}.
+Thought: I will use a priority que for checking the nodes. I have to push the start node = 0 with distance 0 in the que
+Operation: call function PushinQue with inputs {'node': 0, 'distance': 0}
+Results: The start node is pushed!
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 0 and its 'current_distance' from the start node is 0.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 0 and 'current_distance' = 0.
+Operation: call function Update_Dist_Que with inputs {'current_node': 0, 'current_distance': 0}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 5 and its 'current_distance' from the start node is 4.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 5 and 'current_distance' = 4.
+Operation: call function Update_Dist_Que with inputs {'current_node': 5, 'current_distance': 4}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 4 and its 'current_distance' from the start node is 8.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 4 and 'current_distance' = 8.
+Operation: call function Update_Dist_Que with inputs {'current_node': 4, 'current_distance': 8}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 1 and its 'current_distance' from the start node is 14.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 1 and 'current_distance' = 14.
+Operation: call function Update_Dist_Que with inputs {'current_node': 1, 'current_distance': 14}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 6 and its 'current_distance' from the start node is 10.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 6 and 'current_distance' = 10.
+Operation: call function Update_Dist_Que with inputs {'current_node': 6, 'current_distance': 10}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 8 and its 'current_distance' from the start node is 19.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 8 and 'current_distance' = 19.
+Operation: call function Update_Dist_Que with inputs {'current_node': 8, 'current_distance': 19}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 2 and its 'current_distance' from the start node is 33.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 2 and 'current_distance' = 33.
+Operation: call function Update_Dist_Que with inputs {'current_node': 2, 'current_distance': 33}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 3 and its 'current_distance' from the start node is 40.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 3 and 'current_distance' = 40.
+Operation: call function Update_Dist_Que with inputs {'current_node': 3, 'current_distance': 40}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 7 and its 'current_distance' from the start node is 43.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 7 and 'current_distance' = 43.
+Operation: call function Update_Dist_Que with inputs {'current_node': 7, 'current_distance': 43}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 9 and its 'current_distance' from the start node is 12.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 9 and 'current_distance' = 12.
+Operation: call function Update_Dist_Que with inputs {'current_node': 9, 'current_distance': 12}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 10 and its 'current_distance' from the start node is 6.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 10 and 'current_distance' = 6.
+Operation: call function Update_Dist_Que with inputs {'current_node': 10, 'current_distance': 6}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 11 and its 'current_distance' from the start node is 16.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 11 and 'current_distance' = 16.
+Operation: call function Update_Dist_Que with inputs {'current_node': 11, 'current_distance': 16}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 12 and its 'current_distance' from the start node is 19.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 12 and 'current_distance' = 19.
+Operation: call function Update_Dist_Que with inputs {'current_node': 12, 'current_distance': 19}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 7 and its 'current_distance' from the start node is 24.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 7 and 'current_distance' = 24.
+Operation: call function Update_Dist_Que with inputs {'current_node': 7, 'current_distance': 24}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 3 and its 'current_distance' from the start node is 27.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 3 and 'current_distance' = 27.
+Operation: call function Update_Dist_Que with inputs {'current_node': 3, 'current_distance': 27}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 12 and its 'current_distance' from the start node is 48.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 12 and 'current_distance' = 48.
+Operation: call function Update_Dist_Que with inputs {'current_node': 12, 'current_distance': 48}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is not empty
+Thought: I have to pop the node from the que.
+Operation: call function PoPfromQue with inputs {}
+Result: the 'current_node' is 13 and its 'current_distance' from the start node is 24.
+Thought: Now I have to update the 'dists' table and the que with the 'current_node' = 13 and 'current_distance' = 24.
+Operation: call function Update_Dist_Que with inputs {'current_node': 13, 'current_distance': 24}
+Result: The table and the que are updated.
+Thought: Now lets check whether the que is empty or not.
+Operation: call function isQueempty with inputs {}
+Result: The que is empty and the algorithm is finished.
